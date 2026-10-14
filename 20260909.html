@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --ink-soft: #333;
+    --ink-faint: #5a5a5a;
+    --rule: #dcdcdc;
+    --rule-dark: #121212;
+    --paper: #fdfdf9;
+    --accent: #8b0000;
+    --serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    padding: 0 1.25rem 4rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sheet { max-width: 1200px; margin: 0 auto; }
+
+  /* ── top bar ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.05em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .topbar .badge {
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0 0.5em; font-weight: 600; letter-spacing: 0.15em;
+  }
+
+  /* ── masthead ── */
+  .masthead { text-align: center; padding: 1.6rem 0 0.9rem; }
+  .masthead h1 {
+    font-family: "UnifrakturCook", var(--serif);
+    font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: 0.01em;
+  }
+  .masthead .zh {
+    font-size: 0.95rem; letter-spacing: 1.2em; text-indent: 1.2em;
+    color: var(--ink-soft); margin-top: 0.35rem; font-weight: 600;
+  }
+  .masthead .motto {
+    font-size: 0.75rem; font-style: italic; color: var(--ink-faint); margin-top: 0.4rem;
+  }
+  .dateline {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.74rem; letter-spacing: 0.08em; padding: 0.3rem 0.2rem;
+    margin-top: 0.9rem;
+  }
+  nav.sections {
+    display: flex; justify-content: center; gap: 2.2em; flex-wrap: wrap;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    border-bottom: 3px double var(--rule-dark);
+    padding: 0.45rem 0; margin-bottom: 1.6rem;
+  }
+
+  /* ── grid ── */
+  .front {
+    display: grid; gap: 0 1.6rem;
+    grid-template-columns: 1fr 1.9fr 1.15fr;
+  }
+  .front > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band {
+    display: grid; gap: 0 1.6rem; grid-template-columns: repeat(2, 1fr);
+    border-top: 2px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.3rem;
+  }
+  .band > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band-title {
+    grid-column: 1 / -1; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.35em; text-indent: 0.35em; color: var(--ink-soft);
+    margin-bottom: 0.9rem;
+  }
+
+  /* ── story ── */
+  article.story { margin-bottom: 1.7rem; }
+  .kicker {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .story h2 { font-weight: 900; line-height: 1.42; font-size: 1.22rem; margin-bottom: 0.45rem; }
+  .story.lead h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.38; }
+  .story h2 a:hover { text-decoration-thickness: 2px; }
+  .excerpt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.55rem; }
+  .byline { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .byline a { border-bottom: 1px dotted var(--ink-faint); }
+  figure { margin: 0 0 0.8rem; }
+  figure img { width: 100%; display: block; filter: saturate(0.85); background: #eee; min-height: 200px; }
+  figcaption { font-size: 0.7rem; color: var(--ink-faint); padding-top: 0.3rem; line-height: 1.6; }
+
+  /* ── snark ── */
+  .snark {
+    border-top: 1px solid var(--rule-dark);
+    margin-top: 0.7rem; padding-top: 0.45rem;
+    font-size: 0.85rem; line-height: 1.8; color: var(--ink);
+  }
+  .snark .label {
+    display: inline-block; font-style: normal; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    color: var(--paper); background: var(--ink);
+    padding: 0.05em 0.6em 0.05em 0.75em; margin-right: 0.55em;
+    transform: translateY(-0.12em);
+  }
+  .snark em { font-style: normal; border-bottom: 3px double var(--rule-dark); }
+
+  /* ── opinion column ── */
+  .opinion h3 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-align: center; border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 0.4rem; margin-bottom: 0.9rem;
+  }
+  .opinion h2 { font-size: 1.35rem; font-weight: 900; line-height: 1.45; margin-bottom: 0.6rem; }
+  .opinion p { font-size: 0.9rem; margin-bottom: 0.9em; }
+  .opinion .sig { font-size: 0.75rem; color: var(--ink-faint); text-align: right; font-style: italic; }
+  .drop::first-letter {
+    float: left; font-size: 3.2em; line-height: 0.85;
+    padding: 0.08em 0.12em 0 0; font-weight: 900;
+  }
+
+  /* ── footer ── */
+  footer {
+    border-top: 3px double var(--rule-dark); margin-top: 2.5rem; padding-top: 1rem;
+    font-size: 0.76rem; color: var(--ink-faint); line-height: 2;
+  }
+  footer strong { color: var(--ink-soft); }
+
+  @media (max-width: 920px) {
+    .front { grid-template-columns: 1fr 1fr; }
+    .front .col-lead { grid-column: 1 / -1; grid-row: 1; border-left: none; padding-left: 0; border-bottom: 2px solid var(--rule-dark); margin-bottom: 1.3rem; }
+    .front .col-left { border-left: none; padding-left: 0; }
+    .band { grid-template-columns: 1fr; }
+    .band > * + * { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 1.1rem; }
+  }
+  @media (max-width: 600px) {
+    .front { grid-template-columns: 1fr; }
+    .front > * + * { border-left: none; padding-left: 0; }
+    .front .col-op { border-top: 2px solid var(--rule-dark); padding-top: 1.2rem; }
+    nav.sections { gap: 1.1em; letter-spacing: 0.15em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP（民視・法律白話文運動）</span>
+    <span class="badge">DAILY BRIEFING</span>
+    <span>撈取時間：2026-09-09 11:24 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-09-09</span>
+      <span>定價：一次 API 呼叫</span>
+    </div>
+    <nav class="sections">
+      <span>政治</span><span>地緣</span><span>科技</span><span>經濟</span><span>社會</span><span>冷眼</span>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <!-- ══ left column ══ -->
+    <section class="col-left">
+      <article class="story">
+        <div class="kicker">政治 · 立法僵局</div>
+        <h2><a href="https://open.firstory.me/story/cmtsqfqmp1j5s01uvbjtj8z28" target="_blank" rel="noopener">政治歸政治 #220｜無人載具條例立法爭議</a></h2>
+        <p class="excerpt">最新一集 Podcast 探討無人載具條例的立法爭議。節目剖析了台灣在無人機與相關載具管理上面臨的法規落後與政治角力挑戰。</p>
+        <div class="byline">法律白話文運動</div>
+        <div class="snark"><span class="label">解析</span>立法永遠跟不上科技發展已是台灣政壇常態，無人載具的爭議只是冰山一角。當滿天都是無人機時，政客們恐怕還在慢條斯理地喬法案與分配利益。</div>
+      </article>
+      
+      <article class="story">
+        <div class="kicker">地緣 · 朝鮮半島</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026909W0184" target="_blank" rel="noopener">北韓軍傳單月越界逾20次 南韓軍方高度戒備密切監控</a></h2>
+        <p class="excerpt">北韓軍隊近期單月越界次數達20次以上，導致南北韓邊境緊張局勢再度升溫。南韓軍方已全面提高戒備，以防突發衝突。</p>
+        <div class="byline">民視</div>
+        <div class="snark"><span class="label">解析</span>金正恩的越界遊戲像是危險的邊緣試探，南韓只能疲於奔命地提高戒備。這場地緣政治的貓鼠遊戲永遠沒有贏家，只有不斷燃燒的軍費與緊繃的神經。</div>
+      </article>
+    </section>
+
+    <!-- ══ lead column ══ -->
+    <section class="col-lead">
+      <article class="story lead">
+        <div class="kicker">社會 · 頭條</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026909W0145" target="_blank" rel="noopener">德國極右翼邦選大勝 川普發文狂賀高喊MGGA</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/d3fd45c4-5aed-4408-b70d-e1a960372d41.jpg" alt="德國極右翼勢力崛起" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>德國極右翼勢力崛起，大洋彼岸的川普亦發文祝賀。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">德國地方選舉中極右翼政黨取得重大勝利，引發國際社會對歐洲民主走向的關注。美國前總統川普甚至發文祝賀，凸顯全球保守勢力的串聯。</p>
+        <div class="byline">民視 · 2026-09-09</div>
+        <div class="snark"><span class="label">解析</span>極右翼在德國的逆襲敲響了傳統民主的警鐘。當選民對現狀的絕望超過對歷史的恐懼時，連大洋彼岸的川普都要來蹭一波熱度，全球政治極化已成定局。</div>
+      </article>
+    </section>
+
+    <!-- ══ opinion column ══ -->
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>AI的智商，人類的混亂</h2>
+        <p class="drop">今天的世界依舊在舊有的混亂中打轉：德國的極右翼在選舉中狂歡，北韓的軍隊在邊境線上玩著無聊的越界遊戲，而台灣的立法院則繼續在無人機法案的政治角力中原地踏步。</p>
+        <p>而在這一切人類的喧囂之外，OpenAI 卻悄悄宣稱他們解開了千禧年數學難題。雖然科技巨頭間的質疑與公關戰隨即開打，但這無疑展示了 AI 在邏輯推理能力上的再一次跳躍式突破。</p>
+        <p>這形成了一個極具諷刺意味的對比：當機器的智商與解題能力正以指數級成長時，人類解決自身政治與社會難題的能力，卻似乎正在成正比地退化。</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ══ second band ══ -->
+  <section class="band">
+    <div class="band-title">科技前沿與創新工具</div>
+
+    <article class="story">
+      <div class="kicker">科技 · 數學難題</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026909W0024" target="_blank" rel="noopener">OpenAI稱AI破解千禧年數學難題 引發同業爭端</a></h2>
+      <figure>
+        <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/9cca012b-1bba-4fcc-925f-daff972436a7.jpg" alt="AI數學解題爭議" loading="lazy" onerror="this.parentElement.style.display='none'">
+        <figcaption>AI 突破性發展再度引發科技圈口水戰。（圖：民視）</figcaption>
+      </figure>
+      <p class="excerpt">OpenAI 宣稱其最新 AI 模型成功破解千禧年數學難題，展現突破性的邏輯推理能力。然而，此高調的技術宣示隨即引發科技同業的質疑與爭端。</p>
+      <div class="byline">民視</div>
+      <div class="snark"><span class="label">解析</span>AI 解開世紀數學難題固然是技術狂歡，但比起數學公式，各家科技巨頭之間的口水戰與公關操作顯然更加難解，技術突破終究免不了淪為商業炒作的籌碼。</div>
+    </article>
+
+    <article class="story" style="opacity: 0.6;">
+       <div class="kicker">編輯室報告</div>
+       <h2><a href="#">(本日新聞版面留白)</a></h2>
+       <p class="excerpt">本報秉持寧缺勿濫原則，嚴格過濾無謂的政壇花邊與純市場炒作。留白的版面，是我們對公共事務意義的最後堅持。</p>
+    </article>
+
+  </section>
+
+  <footer>
+    <p><strong>關於本頁</strong>：這是一個整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙生成。新聞素材於 2026 年 9 月 9 日透過 <strong>Mesh MCP</strong> 擷取。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+</body>
+</html>

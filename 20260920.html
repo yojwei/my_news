@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --ink-soft: #333;
+    --ink-faint: #5a5a5a;
+    --rule: #dcdcdc;
+    --rule-dark: #121212;
+    --paper: #fdfdf9;
+    --accent: #8b0000;
+    --serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    padding: 0 1.25rem 4rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sheet { max-width: 1200px; margin: 0 auto; }
+
+  /* ── top bar ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.05em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .topbar .badge {
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0 0.5em; font-weight: 600; letter-spacing: 0.15em;
+  }
+
+  /* ── masthead ── */
+  .masthead { text-align: center; padding: 1.6rem 0 0.9rem; }
+  .masthead h1 {
+    font-family: "UnifrakturCook", var(--serif);
+    font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: 0.01em;
+  }
+  .masthead .zh {
+    font-size: 0.95rem; letter-spacing: 1.2em; text-indent: 1.2em;
+    color: var(--ink-soft); margin-top: 0.35rem; font-weight: 600;
+  }
+  .masthead .motto {
+    font-size: 0.75rem; font-style: italic; color: var(--ink-faint); margin-top: 0.4rem;
+  }
+  .dateline {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.74rem; letter-spacing: 0.08em; padding: 0.3rem 0.2rem;
+    margin-top: 0.9rem;
+  }
+  nav.sections {
+    display: flex; justify-content: center; gap: 2.2em; flex-wrap: wrap;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    border-bottom: 3px double var(--rule-dark);
+    padding: 0.45rem 0; margin-bottom: 1.6rem;
+  }
+
+  /* ── grid ── */
+  .front {
+    display: grid; gap: 0 1.6rem;
+    grid-template-columns: 1fr 1.9fr 1.15fr;
+  }
+  .front > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band {
+    display: grid; gap: 2rem 1.6rem; grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.3rem;
+  }
+  .band article:not(:nth-child(3n+2)) { border-left: none; padding-left: 0; }
+  .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+
+  .band-title {
+    grid-column: 1 / -1; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.35em; text-indent: 0.35em; color: var(--ink-soft);
+    margin-bottom: 0.9rem; border-bottom: 1px solid var(--rule-dark); padding-bottom: 0.5rem;
+  }
+
+  /* ── story ── */
+  article.story { margin-bottom: 1.7rem; }
+  .kicker {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .story h2 { font-weight: 900; line-height: 1.42; font-size: 1.22rem; margin-bottom: 0.45rem; }
+  .story.lead h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.38; }
+  .story h2 a:hover { text-decoration-thickness: 2px; }
+  .excerpt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.55rem; }
+  .byline { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .byline a { border-bottom: 1px dotted var(--ink-faint); }
+  figure { margin: 0 0 0.8rem; }
+  figure img { width: 100%; display: block; filter: saturate(0.85); background: #eee; min-height: 200px; }
+  figcaption { font-size: 0.7rem; color: var(--ink-faint); padding-top: 0.3rem; line-height: 1.6; }
+
+  /* ── snark & analysis ── */
+  .snark {
+    border-top: 1px solid var(--rule-dark);
+    margin-top: 0.7rem; padding-top: 0.45rem;
+    font-size: 0.85rem; line-height: 1.8; color: var(--ink);
+  }
+  .snark .label {
+    display: inline-block; font-style: normal; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    color: var(--paper); background: var(--ink);
+    padding: 0.05em 0.6em 0.05em 0.75em; margin-right: 0.55em;
+    transform: translateY(-0.12em);
+  }
+  .snark p { margin-bottom: 0.4rem; }
+  .snark p:last-child { margin-bottom: 0; }
+
+  /* ── opinion column ── */
+  .opinion h3 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-align: center; border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 0.4rem; margin-bottom: 0.9rem;
+  }
+  .opinion h2 { font-size: 1.35rem; font-weight: 900; line-height: 1.45; margin-bottom: 0.6rem; }
+  .opinion p { font-size: 0.9rem; margin-bottom: 0.9em; }
+  .opinion .sig { font-size: 0.75rem; color: var(--ink-faint); text-align: right; font-style: italic; }
+  .drop::first-letter {
+    float: left; font-size: 3.2em; line-height: 0.85;
+    padding: 0.08em 0.12em 0 0; font-weight: 900;
+  }
+
+  /* ── footer ── */
+  footer {
+    border-top: 3px double var(--rule-dark); margin-top: 2.5rem; padding-top: 1rem;
+    font-size: 0.76rem; color: var(--ink-faint); line-height: 2;
+  }
+  footer strong { color: var(--ink-soft); }
+
+  @media (max-width: 920px) {
+    .front { grid-template-columns: 1fr 1fr; }
+    .front .col-lead { grid-column: 1 / -1; grid-row: 1; border-left: none; padding-left: 0; border-bottom: 2px solid var(--rule-dark); margin-bottom: 1.3rem; }
+    .front .col-left { border-left: none; padding-left: 0; }
+    .band { grid-template-columns: 1fr 1fr; }
+    .band article:nth-child(odd) { border-left: none; padding-left: 0; }
+    .band article:nth-child(even) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  }
+  @media (max-width: 600px) {
+    .front, .band { grid-template-columns: 1fr; }
+    .front > * + *, .band article { border-left: none !important; padding-left: 0 !important; }
+    .front .col-op { border-top: 2px solid var(--rule-dark); padding-top: 1.2rem; }
+    nav.sections { gap: 1.1em; letter-spacing: 0.15em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP 與 國際權威媒體</span>
+    <span class="badge">HEAVY DUTY EDITION</span>
+    <span>撈取時間：2026-09-20 08:02 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-09-20</span>
+      <span>定價：巨量 API 呼叫</span>
+    </div>
+    <nav class="sections">
+      <span>政治</span><span>地緣</span><span>科技</span><span>經濟</span><span>社會</span><span>氣候</span><span>人權</span><span>冷眼</span>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <!-- ══ left column ══ -->
+    <section class="col-left">
+      <article class="story">
+        <div class="kicker">地緣政治</div>
+        <h2><a href="https://www.google.com/search?q=Trump+Xi+Summit+Washington" target="_blank" rel="noopener">川普與習近平將於華府舉行雙邊峰會</a></h2>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1529107386315-e1a2ed48a620?q=80&w=1000&auto=format&fit=crop" alt="川習華府峰會" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>川習華府峰會將觸及全球供應鏈與 AI 科技競爭等重大議題。</figcaption>
+        </figure>
+        <p class="excerpt">川普與習近平預計於9月24日在華盛頓舉行峰會，預計將討論關稅、AI治理及科技管制等敏感議題。</p>
+        <div class="byline">外媒綜合報導</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>兩大強權的直接對話可能決定未來數年的全球科技供應鏈走向，以及AI領域的國際監管格局。</p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">AI（含最新功能）</div>
+        <h2><a href="https://www.google.com/search?q=Gemini+3.8+Flash+Cyber" target="_blank" rel="noopener">Google DeepMind 推出 Gemini 3.8 Flash 與 Cyber 變體</a></h2>
+        <p class="excerpt">Google發布針對即時對話的Gemini 3.8 Flash，並推出僅供防禦者使用的「Flash Cyber」變體。</p>
+        <div class="byline">外媒綜合報導</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>這展示了科技巨頭將AI模型進行軍民兩用的趨勢，加深了AI武器化的隱憂與防禦競賽。</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ══ lead column ══ -->
+    <section class="col-lead">
+      <article class="story lead">
+        <div class="kicker">AI（含最新功能） · 頭條</div>
+        <h2><a href="https://www.google.com/search?q=OpenAI+GPT-6+Astra" target="_blank" rel="noopener">OpenAI 發表 GPT-6 Astra，觸發「關鍵網路安全」防護機制</a></h2>
+        <figure>
+          <img src="https://images.unsplash.com/photo-1620712943543-bcc4688e7485?q=80&w=1000&auto=format&fit=crop" alt="OpenAI 發表 GPT-6" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>OpenAI 發表新一代具備強大推理能力的 GPT-6 模型。</figcaption>
+        </figure>
+        <p class="excerpt">OpenAI 宣布推出新一代模型 GPT-6 Astra，專注複雜推理運算，並成為首個觸發該公司內部「關鍵網路安全」防護門檻的強大 AI 模型。</p>
+        <div class="byline">權威外媒 · 2026-09-20</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>這標誌著通用人工智慧（AGI）在網路安全領域的深遠影響，將促使各國政府重新評估 AI 的國安風險及防禦策略。</p>
+          <p><span class="label">觀點</span>科技界視為能力重大飛躍，但資安專家與前研究員擔憂將帶來前所未有的系統性風險。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ══ opinion column ══ -->
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>開啟潘朵拉的黑盒子</h2>
+        <p class="drop">GPT-6 Astra 終於來了，帶著足以觸發「關鍵網路安全防護機制」的恐怖算力。我們正見證著人類親手打造的系統跨越了某種界線，它不再只是寫寫文章或畫畫圖，它現在具備了破壞網路基礎設施的潛能。各國政府在聯合國大會上高呼「全球數位契約」，但在華盛頓的川習會談桌上，科技霸權的爭奪顯然比安全對齊來得更為迫切。</p>
+        <p>Anthropic 的研究員已經發出了存在性威脅的警告，而 Google 卻推出了軍民兩用的 Cyber 變體。我們正處於一場沒有剎車的軍備競賽中，市場為 AI 投資了 2.7 兆美元，台股甚至被推上了 47000 點的高峰。在這場狂歡中，我們似乎已經忘記了這項技術可能帶來的毀滅性後果。或許，正如那些警告所言，我們距離失去對這世界的控制，只剩下不到十年的時間。</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ══ massive band ══ -->
+  <section class="band">
+    <div class="band-title">全球深度掃描（影響力新聞 Top 15）</div>
+
+    <article class="story">
+      <div class="kicker">AI（含最新功能）</div>
+      <h2><a href="https://www.google.com/search?q=Anthropic+Claude+5.1" target="_blank" rel="noopener">Anthropic 推出 Claude Fable 5.1 與 Mythos 5.1</a></h2>
+      <p class="excerpt">Anthropic發布專為創意敘事優化的Claude 5.1雙版本，推動生成式AI在內容創作的極限。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>強化「代理式AI」在創意產業應用，可能大幅改變影視、文學等內容生成的商業模式。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">人權與社會議題</div>
+      <h2><a href="https://www.un.org/en/" target="_blank" rel="noopener">聯合國呼籲採取緊急行動防範 AI「前所未有的風險」</a></h2>
+      <p class="excerpt">聯大人權高級專員強烈呼籲各國針對快速發展的AI採取全球一致監管行動。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>推動「全球數位契約」進程，可能成為未來國際社會規範AI研發和部署的基準框架。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.un.org/en/ga/" target="_blank" rel="noopener">第81屆聯合國大會高階週紐約登場</a></h2>
+      <p class="excerpt">第81屆聯合國大會登場，焦點涵蓋衝突、氣候變遷及AI治理的「全球數位契約」。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>這將成為中美兩國在國際多邊舞台爭奪數位與科技話語權的關鍵戰場。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟與地緣政治</div>
+      <h2><a href="https://www.google.com/search?q=Middle+East+shipping+corridors" target="_blank" rel="noopener">中東地緣政治緊張波及紅海航運與全球能源供應</a></h2>
+      <p class="excerpt">中東衝突持續影響重要海上通道，導致原油價格攀升，威脅全球供應鏈穩定。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>促使歐亞國家加速能源轉型並尋求供應鏈多元化，可能進一步推升全球通膨壓力。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.google.com/search?q=Gartner+AI+spending+2.7+trillion" target="_blank" rel="noopener">Gartner 預測全球 AI 支出將於 2026 年達到 2.7 兆美元</a></h2>
+      <p class="excerpt">全球對AI投資預計在2026年將大幅增長近50%，總額達2.7兆美元。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>推動半導體、資料中心基礎建設投資狂潮，重塑全球科技產業的資本分配。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">台美股趨勢與事件</div>
+      <h2><a href="https://www.google.com/search?q=Taiwan+Stocks+AI+boom" target="_blank" rel="noopener">台股受 AI 浪潮推動，加權指數突破 47,000 點</a></h2>
+      <p class="excerpt">受惠全球AI及半導體需求，台股加權指數在9月中旬突破47,180點歷史新高。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>確立台灣在全球AI硬體供應鏈中不可替代的地位，吸引更多國際資金長期進駐。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">台美股趨勢與事件</div>
+      <h2><a href="https://www.google.com/search?q=US+stocks+quadruple+witching" target="_blank" rel="noopener">美股受「四巫日」影響劇烈震盪，費半逆勢上漲</a></h2>
+      <p class="excerpt">美股遇四巫日結算及通膨憂慮承壓，但受強大AI需求支撐，費半單週仍上漲近3%。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>顯示市場資金在宏觀壓力下仍高度集中於AI與高科技板塊，科技股成避風港。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">氣候及社會議題</div>
+      <h2><a href="https://www.google.com/search?q=Taiwan+WADM+World+Alliance+for+Disaster+Management" target="_blank" rel="noopener">台灣宣布成立「世界災害管理聯盟」 (WADM)</a></h2>
+      <p class="excerpt">為強化國際參與，台灣宣布成立世界災害管理聯盟，分享防災經驗。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>藉軟實力與人道援助擴大國際空間，減輕因地緣政治導致的外交孤立。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">AI（含最新功能）</div>
+      <h2><a href="https://www.google.com/search?q=Stop+Rogue+AI+Act" target="_blank" rel="noopener">美國國會推動「制止流氓 AI 法案」</a></h2>
+      <p class="excerpt">美跨黨派議員推動法案，要求AI代理系統向公眾發布前需通過國家級安全測試。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>可能成全球最嚴格規範，減緩先進AI商業化速度，增加企業法遵成本。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.google.com/search?q=US+Treasury+yields+Oil+prices" target="_blank" rel="noopener">高油價與美債殖利率攀升持續打壓美股動能</a></h2>
+      <p class="excerpt">原油逼近每桶100美元及公債殖利率居高不下，引發結構性通膨及高利率長期化擔憂。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>增加企業融資成本並壓縮利潤空間，可能加速全球資金自新興市場撤離。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">台美股趨勢與事件</div>
+      <h2><a href="https://www.google.com/search?q=Taiwan+Central+Bank+housing+loans" target="_blank" rel="noopener">台灣央行適度放寬房貸信用管制</a></h2>
+      <p class="excerpt">為平衡經濟與抑制炒房，台灣央行宣布適度放寬選擇性信用管制，帶動營建類股走揚。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>在維持金融穩定前提下避免房市硬著陸，有助維持內需經濟成長動能。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">AI與社會議題</div>
+      <h2><a href="https://www.google.com/search?q=Anthropic+researcher+AI+existential+threat" target="_blank" rel="noopener">前 Anthropic 研究員警告 AI 的存在性威脅</a></h2>
+      <p class="excerpt">前Anthropic研究員警告AI可能在十年內對人類構成存在性威脅，內部文件顯示擔憂並非空穴來風。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>加劇公眾對超級AI失控恐懼，促使政策制定者加速介入並推動全球AI暫停協議聲浪。</p>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    <p><strong>關於本頁</strong>：這是一個整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙生成。新聞素材於 2026 年 9 月 20 日透過 <strong>Mesh MCP</strong> 擷取（全領域重裝版）。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+</body>
+</html>

@@ -1,0 +1,369 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --ink-soft: #333;
+    --ink-faint: #5a5a5a;
+    --rule: #dcdcdc;
+    --rule-dark: #121212;
+    --paper: #fdfdf9;
+    --accent: #8b0000;
+    --serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    padding: 0 1.25rem 4rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sheet { max-width: 1200px; margin: 0 auto; }
+
+  /* ── top bar ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.05em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .topbar .badge {
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0 0.5em; font-weight: 600; letter-spacing: 0.15em;
+  }
+
+  /* ── masthead ── */
+  .masthead { text-align: center; padding: 1.6rem 0 0.9rem; }
+  .masthead h1 {
+    font-family: "UnifrakturCook", var(--serif);
+    font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: 0.01em;
+  }
+  .masthead .zh {
+    font-size: 0.95rem; letter-spacing: 1.2em; text-indent: 1.2em;
+    color: var(--ink-soft); margin-top: 0.35rem; font-weight: 600;
+  }
+  .masthead .motto {
+    font-size: 0.75rem; font-style: italic; color: var(--ink-faint); margin-top: 0.4rem;
+  }
+  .dateline {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.74rem; letter-spacing: 0.08em; padding: 0.3rem 0.2rem;
+    margin-top: 0.9rem;
+  }
+  nav.sections {
+    display: flex; justify-content: center; gap: 2.2em; flex-wrap: wrap;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    border-bottom: 3px double var(--rule-dark);
+    padding: 0.45rem 0; margin-bottom: 1.6rem;
+  }
+  nav.sections span.highlight {
+    color: var(--accent);
+    border-bottom: 1px solid var(--accent);
+  }
+
+  /* ── grid ── */
+  .front {
+    display: grid; gap: 0 1.6rem;
+    grid-template-columns: 1fr 1.9fr 1.15fr;
+  }
+  .front > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band {
+    display: grid; gap: 2rem 1.6rem; grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.3rem;
+  }
+  .band article:not(:nth-child(3n+2)) { border-left: none; padding-left: 0; }
+  .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+
+  .band-title {
+    grid-column: 1 / -1; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.35em; text-indent: 0.35em; color: var(--ink-soft);
+    margin-bottom: 0.9rem; border-bottom: 1px solid var(--rule-dark); padding-bottom: 0.5rem;
+  }
+
+  /* ── story ── */
+  article.story { margin-bottom: 1.7rem; }
+  .kicker {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .story h2 { font-weight: 900; line-height: 1.42; font-size: 1.22rem; margin-bottom: 0.45rem; }
+  .story.lead h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.38; }
+  .story h2 a:hover { text-decoration-thickness: 2px; }
+  .excerpt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.55rem; }
+  .byline { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .byline a { border-bottom: 1px dotted var(--ink-faint); }
+  figure { margin: 0 0 0.8rem; }
+  figure img { width: 100%; display: block; filter: saturate(0.85); background: #eee; min-height: 200px; }
+  figcaption { font-size: 0.7rem; color: var(--ink-faint); padding-top: 0.3rem; line-height: 1.6; }
+
+  /* ── snark & analysis ── */
+  .snark {
+    border-top: 1px solid var(--rule-dark);
+    margin-top: 0.7rem; padding-top: 0.45rem;
+    font-size: 0.85rem; line-height: 1.8; color: var(--ink);
+  }
+  .snark .label {
+    display: inline-block; font-style: normal; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    color: var(--paper); background: var(--ink);
+    padding: 0.05em 0.6em 0.05em 0.75em; margin-right: 0.55em;
+    transform: translateY(-0.12em);
+  }
+  .snark p { margin-bottom: 0.4rem; }
+  .snark p:last-child { margin-bottom: 0; }
+
+  /* ── opinion column ── */
+  .opinion h3 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-align: center; border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 0.4rem; margin-bottom: 0.9rem;
+  }
+  .opinion h2 { font-size: 1.35rem; font-weight: 900; line-height: 1.45; margin-bottom: 0.6rem; }
+  .opinion p { font-size: 0.9rem; margin-bottom: 0.9em; }
+  .opinion .sig { font-size: 0.75rem; color: var(--ink-faint); text-align: right; font-style: italic; }
+  .drop::first-letter {
+    float: left; font-size: 3.2em; line-height: 0.85;
+    padding: 0.08em 0.12em 0 0; font-weight: 900;
+  }
+
+  /* ── footer ── */
+  footer {
+    border-top: 3px double var(--rule-dark); margin-top: 2.5rem; padding-top: 1rem;
+    font-size: 0.76rem; color: var(--ink-faint); line-height: 2;
+  }
+  footer strong { color: var(--ink-soft); }
+
+  @media (max-width: 920px) {
+    .front { grid-template-columns: 1fr 1fr; }
+    .front .col-lead { grid-column: 1 / -1; grid-row: 1; border-left: none; padding-left: 0; border-bottom: 2px solid var(--rule-dark); margin-bottom: 1.3rem; }
+    .front .col-left { border-left: none; padding-left: 0; }
+    .band { grid-template-columns: 1fr 1fr; }
+    .band article:nth-child(odd) { border-left: none; padding-left: 0; }
+    .band article:nth-child(even) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  }
+  @media (max-width: 600px) {
+    .front, .band { grid-template-columns: 1fr; }
+    .front > * + *, .band article { border-left: none !important; padding-left: 0 !important; }
+    .front .col-op { border-top: 2px solid var(--rule-dark); padding-top: 1.2rem; }
+    nav.sections { gap: 1.1em; letter-spacing: 0.15em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP 與 國際權威媒體</span>
+    <span class="badge">HEAVY DUTY EDITION</span>
+    <span>撈取時間：2026-10-11 08:02 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-10-11</span>
+      <span>定價：巨量 API 呼叫</span>
+    </div>
+    <nav class="sections">
+      <span class="highlight">台灣政治</span><span>地緣</span><span>科技</span><span>經濟</span><span>社會</span><span>氣候</span><span>人權</span><span>冷眼</span>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <!-- ══ left column ══ -->
+    <section class="col-left">
+      <article class="story">
+        <div class="kicker">地緣政治</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0099" target="_blank" rel="noopener">沙烏地機場遭飛彈襲擊釀12死 川普考慮聯手反擊</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/fb364b71-63b8-4b5e-8440-621be5afcf17.jpg" alt="沙烏地機場遇襲" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>沙烏地阿拉伯哈利德國王國際機場遇襲後濃煙直竄。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">沙烏地首都國際機場遭葉門青年運動飛彈襲擊，釀12死309傷航運中斷。川普表態考慮聯手沙國軍事反擊，波斯灣局勢瀕臨失控。</p>
+        <div class="byline">民視 / 法新社 / 路透社</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>沙國核心民航設施遇襲打破中東防禦平衡，美軍若介入將使戰火外溢至波斯灣能源中樞，推升全球航運風險與原油供應鏈危機。</p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">台灣政治</div>
+        <h2><a href="https://www.youtube.com/watch?v=7OYed2C2CdU" target="_blank" rel="noopener">台美國防合作機制化 五角大廈長駐國防部核心圈</a></h2>
+        <p class="excerpt">美防務官員與智庫代表規劃長駐中華民國國防部，直接參與戰略研擬，象徵協調躍升為制度化、實質作戰指揮對接。</p>
+        <div class="byline">鏡新聞</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>突破斷交以來限制，美軍分散式殺傷思維嵌入國軍防衛架構，壓縮中共灰色地帶襲擾空間，對疑美論產生定海神針作用。</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ══ lead column ══ -->
+    <section class="col-lead">
+      <article class="story lead">
+        <div class="kicker">台灣政治 · 頭條</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A10W0462" target="_blank" rel="noopener">賴清德雙十國慶演說：提高國防預算至1.1兆「嚇阻戰爭」，以山巔之城定錨台灣戰略</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/023bdf7c-9662-4430-be4d-6c2b6d10087e.jpg" alt="國慶演說直升機編隊" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>國慶大典上直升機吊掛巨幅國旗飛越總統府上空，展現國軍防衛決心。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">總統賴清德以「山巔之城」為題發表演說，強調台灣熱愛和平但絕不放棄自由，編列2027年高達1.1兆元（占GDP逾3%）國防預算旨在嚇阻戰爭。演說未沿用互不隸屬措辭，改引聖經寶訓將台灣定位為勇氣與自信的民主燈塔。</p>
+        <div class="byline">民視 / 路透社 · 2026-10-11</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>將國防支出正式推升至占GDP 3%以上，直接回應美方期待；以「山巔之城」重構國際敘事，將兩岸對抗格局提升為全球民主防線治理，確立台灣半導體與地緣不可替代性。</p>
+          <p><span class="label">觀點</span>府方強調加強國防是為了對等對話；美方肯定維護現狀承諾；國台辦則批評其以武謀獨。中共甚至發動官媒追殺出席造勢的蔡康永，定性為「騎牆兩面人」全面施加寒蟬效應。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ══ opinion column ══ -->
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>山巔之城與波斯灣的烽火</h2>
+        <p class="drop">在雙十國慶的大典上，賴清德用「山巔之城」為台灣定錨，將 1.1 兆元的國防預算化作嚇阻戰爭的硬實力。這座燈塔確實足夠耀眼——9 月出口衝上 872 億美元歷史新高，AI 供應鏈讓台灣對美順差暴增三倍以上，五角大廈的官員更準備實質進駐國防部。然而，燈塔越亮，投射出的陰影也越深。北京的軍媒已經開始連蔡康永出席造勢都要獵巫追殺，這意味著兩岸的文化與商業灰度空間正在被無情抹殺。</p>
+        <p>而在世界的另一端，和平的防線正以令人心驚的速度崩塌。青年運動的飛彈直接砸進了利雅德國際機場，荷姆茲海峽的油輪遇襲起火，川普為了壓低通膨甚至公開要求烏克蘭換掉澤倫斯基。當超級大國的承諾開始隨著油價起伏而動搖，當波斯灣的能源走廊隨時可能斷供，台灣這座「山巔之城」所依賴的繁榮體系，其實比想像中更加緊繃脆弱。擁有算力與矽盾固然是我們的底氣，但在這個失序的多極世界裡，如何不被巨浪吞噬，考驗著執政者超越口號的真正智慧。</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ══ massive band ══ -->
+  <section class="band">
+    <div class="band-title">全球深度掃描（影響力新聞 Top 15）</div>
+
+    <article class="story">
+      <div class="kicker">台灣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0081" target="_blank" rel="noopener">中共軍媒追殺蔡康永為沈伯洋站台 定性騎牆兩面人</a></h2>
+      <p class="excerpt">蔡康永現身沈伯洋造勢遭解放軍官媒點名痛批，車企與雜誌隨即解除合作引發寒蟬效應。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>中共對台公眾人物審查降至零容忍，逼迫兩岸公眾人物全面選邊站，商業合作空間驟縮。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0092" target="_blank" rel="noopener">川普公開籲烏克蘭換總統 澤倫斯基痛批助長侵略</a></h2>
+      <p class="excerpt">川普為壓通膨解禁俄柴油，警告烏軍停止轟炸俄煉油廠，並公開呼籲烏克蘭更換能協議的新總統。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>美烏戰時同盟出現根本裂痕，能源導向外交削弱G7制裁防線，加劇歐洲對美承諾疑慮。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0095" target="_blank" rel="noopener">颶風重創墨西哥灣產油 美急釋400萬桶戰略儲備</a></h2>
+      <p class="excerpt">二級颶風伊賽亞斯致墨灣70%產油停擺，美能源部緊急釋出400萬桶戰略石油儲備應急。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>美戰略儲備降至1982年以來最低水位，再度提領大幅削弱面對地緣衝突時的宏觀調節槓桿。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0094" target="_blank" rel="noopener">荷姆茲海峽油輪遭擊中起火 波斯灣戰略咽喉警戒</a></h2>
+      <p class="excerpt">出境油輪於荷姆茲海峽遭不明物體擊中起火，波斯灣航運保險與原油運輸神經高度緊繃。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>非對稱作戰手段封鎖關鍵隘口，一旦保險暫停或繞道將觸發全球供應鏈運價狂飆與原油滯運危機。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">社會議題</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0096" target="_blank" rel="noopener">美司法部反托拉斯調查五大電視網 質疑聯合抵制</a></h2>
+      <p class="excerpt">美司法部對ABC、CNN、Fox等展開調查，質疑共用採訪團聯合抵制白宮恐涉非法勾結。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>開創政府運用反壟斷法規整頓媒體聯合計制先例，引發行政權侵蝕新聞自由的重大憲政爭議。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">人權</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0078" target="_blank" rel="noopener">新德里全面封城阻示威 逾2000人抗議名冊遭剔除</a></h2>
+      <p class="excerpt">印度警方封城斷網拘捕逾2000示威者，反對陣營指控選委會剔除1.3億選民圖利執政黨。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>暴露出印度在選務公正與民主制度上的深層信任裂痕，大規模數位斷網維穩使國際形象受考驗。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">人權</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A10W0500" target="_blank" rel="noopener">美制裁國際刑事法院 和平獎得主斥不可接受</a></h2>
+      <p class="excerpt">前ICC法官獲諾貝爾和平獎後數小時美即制裁ICC定為流氓法院，和平獎得主斥踐踏法治。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>制裁ICC人員開啟大國規避國際法管轄危險先例，使全球戰爭罪追責體系面臨制度性瓦解。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">氣候及社會議題</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A10W0511" target="_blank" rel="noopener">巴西檢方因致命洪災 向殼牌求償1億美元</a></h2>
+      <p class="excerpt">巴西檢方針對2024致命洪災向殼牌提起訴訟求償1億美元，依歷史碳排占全球2%要求賠償。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>全球首宗主權國家向化石巨頭提歷史碳排賠償，若勝訴將引發全球南方國家巨額氣候追償海嘯。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A10W0517" target="_blank" rel="noopener">非洲之角重燃戰火 厄利垂亞控衣索比亞調兵宣戰</a></h2>
+      <p class="excerpt">厄利垂亞指控衣索比亞集結重兵等同實質宣戰，雙方在紅海出海口與邊界重鎮對峙加劇。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>若爆發全面戰爭將使東北非陷入難民浩劫，直接危及紅海南端曼德海峽戰略航道安全。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">人權</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0023" target="_blank" rel="noopener">巴勒斯坦總統大選延至2027 反對派斥民主犯罪</a></h2>
+      <p class="excerpt">阿巴斯簽署法令將大選推遲至2027，整整20年未改選國會，反對派斥實質宣告民主體制死亡。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>長期逾期執政使自治政府完全失去民意正當性，權力真空與派系分裂恐使戰後治理方案淪為空談。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">科技</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A11W0064" target="_blank" rel="noopener">巴西大選決選倒數 魯拉陣營控Meta演算法限流</a></h2>
+      <p class="excerpt">巴西總統魯拉團隊申訴Meta演算法涉嫌偏袒極右翼對手刻意阻擋貼文，Meta駁斥不實。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>跨國社群黑箱推薦系統已成為各國防範認知操弄的國安疑慮，加速拉美推動算法透明度立法。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A10W0351" target="_blank" rel="noopener">9月出口衝872億美元新高 AI助攻對美順差暴增</a></h2>
+      <p class="excerpt">9月出口創單月新高，AI全球競賽助攻，台灣對美順差暴增3.5倍，支撐台股挑戰五萬點。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>台灣形成不可取代的矽盾算力樞紐，深化台美戰略經濟一體化，惟需提防單一領域出口脆弱性。</p>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    <p><strong>關於本頁</strong>：這是一個整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙生成。新聞素材於 2026 年 10 月 11 日透過 <strong>Mesh MCP</strong> 擷取（全領域重裝版）。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+</body>
+</html>

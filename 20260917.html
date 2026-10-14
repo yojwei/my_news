@@ -1,0 +1,620 @@
+<!DOCTYPE html>
+<html lang="zh-TW">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>大昌日報 - 每日深度新聞策展 (2026-09-17)</title>
+    <style>
+        :root {
+            --primary-text: #1a1a1a;
+            --secondary-text: #555;
+            --border-color: #e2e2e2;
+            --accent-color: #000;
+            --bg-color: #f9f9f9;
+        }
+        body {
+            font-family: "Georgia", "Times New Roman", serif;
+            color: var(--primary-text);
+            line-height: 1.6;
+            margin: 0;
+            padding: 0;
+            background-color: var(--bg-color);
+        }
+        .header {
+            text-align: center;
+            padding: 40px 20px;
+            border-bottom: 4px solid var(--accent-color);
+            background-color: #fff;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            font-family: "Arial Black", "Impact", sans-serif;
+            font-size: 3.5rem;
+            margin: 0;
+            text-transform: uppercase;
+            letter-spacing: 2px;
+        }
+        .header .date {
+            font-size: 1rem;
+            color: var(--secondary-text);
+            margin-top: 10px;
+            text-transform: uppercase;
+            border-top: 1px solid var(--border-color);
+            border-bottom: 1px solid var(--border-color);
+            display: inline-block;
+            padding: 5px 20px;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 30px;
+        }
+        @media (min-width: 768px) {
+            .container {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .headline {
+                grid-column: 1 / -1;
+            }
+        }
+        @media (min-width: 1024px) {
+            .container {
+                grid-template-columns: repeat(3, 1fr);
+            }
+            .headline {
+                grid-column: 1 / -1;
+                display: grid;
+                grid-template-columns: 2fr 1fr;
+                gap: 30px;
+                align-items: start;
+            }
+        }
+        
+        .article {
+            background: #fff;
+            padding: 20px;
+            border: 1px solid var(--border-color);
+            box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+            display: flex;
+            flex-direction: column;
+        }
+        
+        .article.headline {
+            padding: 30px;
+            border: none;
+            border-bottom: 3px double var(--accent-color);
+            box-shadow: none;
+            background: transparent;
+        }
+        
+        .category-label {
+            font-family: "Arial", sans-serif;
+            font-size: 0.8rem;
+            font-weight: bold;
+            color: #d32f2f;
+            text-transform: uppercase;
+            margin-bottom: 10px;
+            display: block;
+        }
+        
+        .article h2 {
+            font-size: 1.8rem;
+            margin: 0 0 15px 0;
+            line-height: 1.3;
+        }
+        
+        .headline h2 {
+            font-size: 2.5rem;
+        }
+        
+        .article-image {
+            width: 100%;
+            height: auto;
+            margin-bottom: 15px;
+            border: 1px solid #ccc;
+        }
+        
+        .caption {
+            font-size: 0.85rem;
+            color: var(--secondary-text);
+            text-align: right;
+            margin-top: -10px;
+            margin-bottom: 15px;
+            font-style: italic;
+        }
+
+        .analysis-section {
+            margin-top: auto;
+            border-top: 1px solid #eee;
+            padding-top: 15px;
+            font-size: 0.95rem;
+        }
+        
+        .analysis-item {
+            margin-bottom: 12px;
+        }
+        
+        .analysis-item strong {
+            font-family: "Arial", sans-serif;
+            color: var(--accent-color);
+            font-size: 0.9rem;
+            display: block;
+            margin-bottom: 3px;
+        }
+        
+        .commentary {
+            background-color: #f4f4f4;
+            padding: 15px;
+            border-left: 4px solid var(--accent-color);
+            font-style: italic;
+            margin-top: 15px;
+        }
+        
+        .commentary strong {
+            color: #d32f2f;
+            font-style: normal;
+        }
+
+        .footer {
+            text-align: center;
+            padding: 30px;
+            margin-top: 50px;
+            border-top: 4px solid var(--accent-color);
+            font-family: "Arial", sans-serif;
+            font-size: 0.9rem;
+            color: var(--secondary-text);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="header">
+        <h1>大昌日報</h1>
+        <div class="date">2026年9月17日 · 權威觀點 · 冷眼批判</div>
+    </div>
+
+    <div class="container">
+
+        <div class="article headline">
+            <div class="content-wrapper">
+                <span class="category-label">科技與AI</span>
+                <h2>OpenAI四天破解百年數學難題　頂尖學者憂衝擊研究界</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/c8bd8783-9be7-44b1-a60c-2f87a5167cec.jpg" alt="OpenAI四天破解百年數學難題　頂尖學者憂衝擊研究界" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> OpenAI 最新模型在四天內解決了困擾數學界百年的難題，引發學術界對於人類研究者未來定位的恐慌。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> AI 將從輔助工具轉變為知識創造的主力，傳統基礎科學的研究典範面臨顛覆。未來的科學突破將高度依賴算力資本。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 科技樂觀派認為這將帶來科技爆炸式成長；然而保守學派警告，若失去人類的數學直覺驗證，盲目信任 AI 可能導致科學發展走向黑箱化。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 各大頂尖學府已開始緊急召開研討會，評估是否應當調整數學與理論物理的博士生培養方針。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 此事件戳破了『AI 僅能進行模式識別而無法創新』的傲慢迷思。知識生產的壟斷權正式從人類精英階層轉移到科技巨頭手中，這與其說是科學的勝利，不如說是資本對真理闡釋權的全面接管。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">地緣政治</span>
+                <h2>俄羅斯空襲基輔與敖德薩　建築遭毀釀13傷含1名孩童</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/f6f294c9-6153-4667-b33b-8e4c5af81e19.jpg" alt="俄羅斯空襲基輔與敖德薩　建築遭毀釀13傷含1名孩童" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 俄軍對烏克蘭重點城市基輔與敖德薩發動新一波飛彈與無人機空襲，造成基礎設施毀損與平民死傷。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 顯示俄羅斯意圖在冬季來臨前，徹底摧毀烏克蘭的能源與民生韌性，迫使烏克蘭在疲勞戰中屈服。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 西方盟國譴責此為戰爭罪行並承諾加速防空系統交付；但發展中國家陣營則多保持沈默，甚至視之為烏克蘭拒絕和談的代價。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 烏克蘭已向北約提出新一輪的遠程武器使用授權要求，企圖打擊俄國境內發射基地。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 國際社會的『譴責疲勞』正在蔓延。每一次的空襲不再是改變戰局的轉捩點，而是將戰爭常態化的催化劑。弱國的平民生命淪為強權博弈中的消耗性籌碼，這不僅是地緣政治的悲哀，更是全球人權機制的徹底失靈。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">全球經濟與台股</span>
+                <h2>無視美股連三黑！台股早盤大漲500點　台積電開2405元</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/0b97d7d7-4f89-4fe3-a769-a56dcfb773f4.jpg" alt="無視美股連三黑！台股早盤大漲500點　台積電開2405元" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 在美股連續重挫的背景下，台股卻逆勢反彈，台積電股價更是跳空大漲，展現出極強的抗跌性與獨立走勢。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 台灣半導體產業在全球供應鏈中的『不可替代性』已超越了短期的總體經濟波動。資本市場正在將台股視為 AI 時代的『避險資產』。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 外資報告指出這反映了 AI 資本支出的剛性需求；但本土避險基金則警告，這可能是資金過度集中的『最後瘋狂』，脫離了基本面的支撐。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 散戶開戶數激增，市場資金正不計代價湧入大型權值股，排擠了中小型企業的流動性。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 台股的逆勢繁榮，實則是『一個台灣，兩個世界』的經濟縮影。當台積電的股價成為全民信仰時，我們看到的是產業極度單一化的脆弱風險。一旦 AI 泡沫面臨修正，這座被捧上天的護國神山，恐將成為壓垮台灣經濟多樣性的巨石。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">全球經濟</span>
+                <h2>美國聯準會宣布升息1碼　抗擊高通膨引發川普怒火</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/e13b047a-0555-418e-be0f-96c1a9fe3a21.jpg" alt="美國聯準會宣布升息1碼　抗擊高通膨引發川普怒火" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 面對頑固的高通膨，聯準會出乎市場預期宣布升息一碼，引發美國總統川普強烈抨擊，指責其扼殺經濟成長。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 央行獨立性面臨政治力量的前所未有挑戰。若聯準會屈服於政治壓力，美元的全球儲備貨幣地位將受到根本性動搖。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 經濟學家普遍支持聯準會防範通膨失控的決心；但政治人物與企業界則認為高利率正在摧毀製造業復甦的生機。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 白宮已暗示可能透過行政手段限制聯準會主席的職權，華爾街隨即出現劇烈的債市拋售潮。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 這是一場『政治短視』與『經濟理性』的直球對決。川普的憤怒反映了民粹主義對複雜經濟機制的無知與傲慢。當央行的利率決策必須為選票服務時，美國所輸掉的將不僅是通膨戰役，更是全球金融霸權的最後底線。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">氣候與環境</span>
+                <h2>尼泊爾冰川崩塌釀重大傷亡　科學家直指氣候變遷是主因</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/9fbf0b9a-931d-4096-9f8d-a893cf110780.jpg" alt="尼泊爾冰川崩塌釀重大傷亡　科學家直指氣候變遷是主因" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 喜馬拉雅山脈發生嚴重冰川崩塌，毀滅數個村落，科學機構迅速發布報告，確認極端暖化為災難元兇。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 亞洲水塔的崩解已進入不可逆的倒數計時。未來十年，南亞與東南亞將面臨災難性的水資源短缺與氣候難民潮。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 環保組織呼籲已開發國家應立即支付氣候賠償金；然而工業國則試圖將焦點轉移至當地的預警基礎建設不足。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 多國救援隊已進駐，但後續的冰湖潰決風險導致數十萬人被迫緊急撤離。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 自然界正在用最殘酷的方式進行『強制清算』。尼泊爾的悲劇只是氣候崩潰的前奏，而全球政治領袖仍在氣候峰會上玩弄文字遊戲。當冰川融水的洪水退去，留下的將是人類對地球傲慢剝削的歷史墓碑。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">地緣政治與經濟</span>
+                <h2>歐盟擬邀加拿大成準成員國　川普怒嗆祭重稅甚至斷貿易</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/bd0b5364-3e5a-4179-ac04-f98332b515e5.jpg" alt="歐盟擬邀加拿大成準成員國　川普怒嗆祭重稅甚至斷貿易" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 歐盟推動將加拿大納入準成員國經濟圈，引發美國總統川普的強烈反彈，威脅將對加國實施毀滅性關稅。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 北美自由貿易體系面臨實質性解體風險，西方陣營的經濟板塊正在沿著『美洲主義』與『大西洋主義』發生斷裂。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 歐盟視此為抗衡美國保護主義的戰略擴張；加拿大國內則陷入『擁抱歐洲』或『屈從美國』的國家路線撕裂。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 加國總理已拒絕川普的最後通牒，並加速與布魯塞爾的最終條約談判。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 川普的霸凌外交正在將傳統盟友逼向競爭對手的懷抱。這場風波揭示了美國作為『帝國』的日漸衰弱——當一個霸權只能依賴關稅大棒來維繫影響力，而非透過共榮願景來吸引盟友時，其體系的崩塌只是時間問題。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">科技與社會</span>
+                <h2>防資料中心推升電費　美國眾議院首度通過保護法案</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/80ce5af7-14d0-400f-a2bc-db331588301f.jpg" alt="防資料中心推升電費　美國眾議院首度通過保護法案" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 為防止 AI 資料中心的龐大耗電量轉嫁至一般民眾電費，美眾議院通過法案，強制科技巨頭承擔專屬電網成本。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> AI 產業的發展成本將被『內部化』，過去依賴公共基礎設施補貼的暴利時代結束。這將迫使科技業加速投資綠能與核能。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 民生倡議團體讚揚這是能源正義的勝利；科技遊說團體則警告，這將扼殺美國在全球 AI 競賽中的領先地位。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 多家矽谷巨頭已聯合提起違憲訴訟，企圖在參議院封殺該法案。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 這是一次遲來的『數位資本主義糾偏』。長期以來，科技巨頭享受著技術紅利，卻將碳排放與能源成本外部化給全社會承擔。此法案揭開了 AI 烏托邦虛偽的面紗：沒有所謂的雲端，只有燃燒著地球資源的巨大伺服器農場。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">科技與經濟</span>
+                <h2>美法官判Google須放寬廣告規則　駁回司法部分拆要求</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/68562e0a-6944-48b1-a2d7-e800451d8822.jpg" alt="美法官判Google須放寬廣告規則　駁回司法部分拆要求" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 針對 Google 反壟斷案，法官最終判決其需開放廣告市場競爭，但拒絕了美國司法部將其強制分拆的激進訴求。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 科技巨頭的『大而不倒』地位獲得法律認證。未來的反壟斷監管將轉向行為約束，而非結構性拆解。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 投資者額手稱慶，推升科技股大漲；但反壟斷學者批評此判決過於軟弱，無法實質改變 Google 扼殺創新的商業生態。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 司法部已表態將繼續上訴，但法界普遍認為翻盤機率渺茫。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 司法的妥協再次證明了跨國資本對國家機器的勝利。保留了 Google 帝國的完整性，所謂的『放寬規則』不過是給競爭者留下的麵包屑。當司法系統已無法理解或馴服當代科技壟斷的本質時，市場的自由競爭已淪為神話。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">地緣政治</span>
+                <h2>金與正稱北韓擁核地位不可逆　狠嗆指望無核化是白痴</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/3042a2e0-bc0b-4f0f-ad0a-e14a95d0c37e.jpg" alt="金與正稱北韓擁核地位不可逆　狠嗆指望無核化是白痴" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 北韓勞動黨副部長金與正發表強硬聲明，宣告核武國家地位已成定局，並粗鄙嘲諷國際社會的無核化談判企圖。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 東亞核擴散的潘朵拉盒子徹底敞開。韓國與日本發展自主核武的國內政治聲浪將獲得空前正當性。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 平壤視此為抵禦美國政權更迭企圖的終極保險；華府與首爾則譴定的這是對印太安全的公然勒索。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 美日韓已宣布將於下週舉行三方聯合戰略核威懾軍演作為回應。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 金與正的狂言撕破了國際社會數十年來自欺欺人的『無核化』幻象。北韓的核武已不再是談判籌碼，而是其政權生存的本體。面對一個將核彈綁在身上的流氓國家，傳統的威懾理論已然失效，東亞正滑向深不見底的安全深淵。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">地緣政治</span>
+                <h2>美國眾議院通過全面制裁俄羅斯法案　送交川普簽署</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/5bbed73c-db82-4773-bb0d-15ba65940d05.jpg" alt="美國眾議院通過全面制裁俄羅斯法案　送交川普簽署" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 為了限縮總統的親俄傾向，美眾院強勢通過涵蓋金融與能源的極限對俄制裁法案，球回到川普手上。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 美國國內政治的黨派鬥爭正在深刻綁架其外交戰略。美俄關係的冰凍期將被法律體制化，剝奪了行政部門的靈活斡旋空間。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 國會鷹派認為這是防堵獨裁擴張的必要之惡；但克里姆林宮警告這等同於經濟宣戰，將引發不對稱報復。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 川普在社群媒體上抱怨法案違憲，但面對否決權恐遭國會推翻的壓力，正考慮勉強簽署。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 這是一場發生在華盛頓的宮廷內鬥，卻由全世界承擔地緣政治的風險。國會用立法權鎖死了外交的彈性，不僅反映了對現任總統極度的不信任，更暴露了美國帝國在處理大國競爭時，已經失去了大戰略的從容，只剩下應激反應的制裁成癮症。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">人權與社會</span>
+                <h2>哥倫比亞法院解禁空襲叛軍　命軍方加強保護未成年人</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/dd6ac8c8-d694-4dd2-8aa5-4571c6c637ae.jpg" alt="哥倫比亞法院解禁空襲叛軍　命軍方加強保護未成年人" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 哥倫比亞最高法院撤銷了對軍方空襲叛軍營地的禁令，但附加了極其嚴苛的條件，要求必須確保沒有未成年武裝份子在場。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 游擊戰的道德困境被推向極致。叛軍將變本加厲地強徵兒童兵作為『人體盾牌』，反叛亂作戰將變得更加寸步難行。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 軍方抱怨此裁決脫離戰場現實，等於是繳械；人權組織則勉強接受，認為這是防止國家暴力濫殺無辜的底線。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 已有叛軍組織公開招募15歲以下青少年，企圖利用法律漏洞建立『免疫營地』。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 法院的判決充滿了法學象牙塔裡的偽善。試圖用『保護未成年人』的崇高理想來規範殘酷的叢林游擊戰，結果適得其反，反而將兒童直接推向了戰火的最前線。這不是人權的勝利，而是國家治理無能的遮羞布。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">經濟與社會</span>
+                <h2>美國油價創新高　川普政府暫時放寬油罐車司機工時限制</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/ea2a385c-5144-493d-95ed-18d322c92646.jpg" alt="美國油價創新高　川普政府暫時放寬油罐車司機工時限制" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 為平息國內因油價飆漲引發的民怨，川普政府緊急發布行政命令，暫停油罐車司機的疲勞駕駛工時限制以加速運輸。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 將經濟通膨的壓力轉嫁到勞工的生命安全上，凸顯了美國物流供應鏈極端脆弱的本質。交通事故風險將顯著上升。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 石油業界讚揚此為務實的危機處理；但工會與交通安全倡議者痛批這是拿司機與大眾的鮮血來換取選票。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 多州公路警察工會已表示將拒絕配合執行這項『罔顧人命』的豁免令。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 這項政策是短視近利的極致展現。解決能源危機的解方，竟然是合法化血汗勞動與疲勞駕駛。川普政府為了粉飾其能源戰略的失敗，不惜將整個國家的公路變成高風險的火藥庫。資本主義的嗜血性，在這一張張油價看板下展露無遺。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">全球經濟</span>
+                <h2>通膨壓力未解　IMF示警澳洲央行恐須進一步升息</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/aae3bcb3-ceb6-4ea5-a834-35460994fea6.jpg" alt="通膨壓力未解　IMF示警澳洲央行恐須進一步升息" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 國際貨幣基金組織（IMF）發布報告，直指澳洲通膨結構僵化，警告其央行若不繼續升息，恐面臨經濟失控。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 澳洲高度依賴房地產與原物料出口的經濟模式面臨嚴峻考驗。高利率可能戳破其長達數十年的房市泡沫，引發深度的經濟衰退。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> IMF 堅持痛苦的緊縮是必要的長痛不如短痛；但澳洲本土政治人物則擔憂這將引發大規模的房貸違約與中產階級破產潮。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 澳洲央行行長承受巨大政治壓力，拒絕承諾未來的利率路徑，導致澳幣重貶。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> IMF 的警告猶如一張冰冷的病危通知書。澳洲長期以來沈迷於寬鬆貨幣與房產炒作的迷幻藥中，如今面對通膨的真實反撲，卻驚覺自己已失去抵禦的能力。這不僅是澳洲的危機，更是全球依靠信貸擴張維持繁榮的經濟體的共同警鐘。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">科技與太空</span>
+                <h2>NASA掃描發現月球百年一遇巨大新撞擊坑</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/53911095-3c74-4dbf-95ed-0266c39842bb.jpg" alt="NASA掃描發現月球百年一遇巨大新撞擊坑" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> NASA 月球勘測軌道飛行器近期影像比對發現，月球表面出現了一個直徑驚人的新撞擊坑，為近百年來最大規模。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 近地空間的隕石威脅機率可能被嚴重低估。這將迫使各國加速太空防禦系統（如行星防禦網）的投資與部署。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 天文學家驚嘆這是觀測史上難得的實時天體撞擊證據；但太空安全戰略家則感到不寒而慄，若撞擊點在地球，後果不堪設想。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 多國航太機構已組建聯合專案小組，重新計算近地小行星的軌道模型。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 月球上的新傷疤，是宇宙對人類的一記無聲耳光。當我們還在為地球上的領土與資源爭得你死我活時，來自深空的隨機滅絕威脅卻近在咫尺。這次是月球替我們擋下了一劫，但人類的傲慢與僥倖，還能維持多久？
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">台美股趨勢</span>
+                <h2>記憶體恐又更缺！郭哲榮點名「這幾檔」佈局漲價潮</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/8dbddc07-1e7c-4952-b06b-2459e33bfd13.jpg" alt="記憶體恐又更缺！郭哲榮點名「這幾檔」佈局漲價潮" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 隨著 AI 伺服器需求暴增與大廠減產效應浮現，記憶體市場面臨嚴重缺貨，分析師高調點名相關概念股將迎來主升段。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 半導體產業的『矽週期』正在被 AI 需求打破，轉向長期的結構性通膨。硬體基礎設施的成本將大幅墊高，壓縮下游應用的利潤空間。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 本土法人狂熱追捧，認為這是千載難逢的財富重分配機會；但外資則相對冷靜，警告重複下單的庫存風險正在快速累積。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 相關概念股在散戶資金湧入下，已出現連續漲停的非理性繁榮現象。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 分析師的『點名』與市場的狂熱，交織成一場資本的狂歡。在 AI 的宏大敘事下，傳統的供需分析已被拋諸腦後。投資人買的不是公司的基本面，而是對未來科技革命的盲目恐懼與貪婪。這場擊鼓傳花的遊戲，最終注定由最晚進場的散戶買單。
+                </div>
+            </div>
+        </div>
+    
+        <div class="article">
+            <div class="content-wrapper">
+                <span class="category-label">經濟與社會</span>
+                <h2>美股飆升推升家庭財富　美國消費動能轉向華爾街</h2>
+                <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/3172870a-2b7d-4239-88fc-a31dcab3b6e1.jpg" alt="美股飆升推升家庭財富　美國消費動能轉向華爾街" class="article-image">
+                <div class="caption">圖：新聞焦點擷取</div>
+            </div>
+            
+            <div class="analysis-section">
+                <div class="analysis-item">
+                    <strong>【焦點摘要】</strong> 美股屢創新高使得擁有股票資產的美國家庭財富大幅增長，這股財富效應成為支撐美國國內消費的關鍵動能。
+                </div>
+                <div class="analysis-item">
+                    <strong>【長期戰略影響】</strong> 美國經濟對金融市場的依賴達到病態程度。實體經濟的薪資成長被邊緣化，經濟增長從『勞動驅動』徹底轉向『資產驅動』。
+                </div>
+                <div class="analysis-item">
+                    <strong>【多方觀點對比】</strong> 華爾街投行稱這是金融民主化的成功典範；然而左翼經濟學者則痛批這加劇了貧富懸殊，因為超過八成的股票掌握在最富有的前百分之十手中。
+                </div>
+                <div class="analysis-item">
+                    <strong>【最新發展追蹤】</strong> 數據顯示，底層百分之五十的家庭正因通膨與高利率而面臨信用卡違約潮。
+                </div>
+                <div class="commentary">
+                    <strong>【大昌冷眼評析】</strong> 繁榮的股市與掙扎的底層，構成了當代美國最諷刺的雙城記。所謂的『家庭財富推升消費』，不過是富人階級在通膨狂歡中的奢侈品消費升級，而普羅大眾卻在為麵包與房租發愁。這不是經濟的強韌，而是分配正義的死亡。
+                </div>
+            </div>
+        </div>
+
+    </div>
+    
+    <div class="footer">
+        © 2026 大昌日報 Da Chang Daily. All rights reserved. 堅持獨立思考，拒絕平庸論述。
+    </div>
+
+</body>
+</html>

@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --ink-soft: #333;
+    --ink-faint: #5a5a5a;
+    --rule: #dcdcdc;
+    --rule-dark: #121212;
+    --paper: #fdfdf9;
+    --accent: #8b0000;
+    --serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    padding: 0 1.25rem 4rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sheet { max-width: 1200px; margin: 0 auto; }
+
+  /* ── top bar ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.05em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .topbar .badge {
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0 0.5em; font-weight: 600; letter-spacing: 0.15em;
+  }
+
+  /* ── masthead ── */
+  .masthead { text-align: center; padding: 1.6rem 0 0.9rem; }
+  .masthead h1 {
+    font-family: "UnifrakturCook", var(--serif);
+    font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: 0.01em;
+  }
+  .masthead .zh {
+    font-size: 0.95rem; letter-spacing: 1.2em; text-indent: 1.2em;
+    color: var(--ink-soft); margin-top: 0.35rem; font-weight: 600;
+  }
+  .masthead .motto {
+    font-size: 0.75rem; font-style: italic; color: var(--ink-faint); margin-top: 0.4rem;
+  }
+  .dateline {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.74rem; letter-spacing: 0.08em; padding: 0.3rem 0.2rem;
+    margin-top: 0.9rem;
+  }
+  nav.sections {
+    display: flex; justify-content: center; gap: 2.2em; flex-wrap: wrap;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    border-bottom: 3px double var(--rule-dark);
+    padding: 0.45rem 0; margin-bottom: 1.6rem;
+  }
+
+  /* ── grid ── */
+  .front {
+    display: grid; gap: 0 1.6rem;
+    grid-template-columns: 1fr 1.9fr 1.15fr;
+  }
+  .front > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band {
+    display: grid; gap: 2rem 1.6rem; grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.3rem;
+  }
+  .band article:not(:nth-child(3n+2)) { border-left: none; padding-left: 0; }
+  .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+
+  .band-title {
+    grid-column: 1 / -1; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.35em; text-indent: 0.35em; color: var(--ink-soft);
+    margin-bottom: 0.9rem; border-bottom: 1px solid var(--rule-dark); padding-bottom: 0.5rem;
+  }
+
+  /* ── story ── */
+  article.story { margin-bottom: 1.7rem; }
+  .kicker {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .story h2 { font-weight: 900; line-height: 1.42; font-size: 1.22rem; margin-bottom: 0.45rem; }
+  .story.lead h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.38; }
+  .story h2 a:hover { text-decoration-thickness: 2px; }
+  .excerpt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.55rem; }
+  .byline { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .byline a { border-bottom: 1px dotted var(--ink-faint); }
+  figure { margin: 0 0 0.8rem; }
+  figure img { width: 100%; display: block; filter: saturate(0.85); background: #eee; min-height: 200px; }
+  figcaption { font-size: 0.7rem; color: var(--ink-faint); padding-top: 0.3rem; line-height: 1.6; }
+
+  /* ── snark & analysis ── */
+  .snark {
+    border-top: 1px solid var(--rule-dark);
+    margin-top: 0.7rem; padding-top: 0.45rem;
+    font-size: 0.85rem; line-height: 1.8; color: var(--ink);
+  }
+  .snark .label {
+    display: inline-block; font-style: normal; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    color: var(--paper); background: var(--ink);
+    padding: 0.05em 0.6em 0.05em 0.75em; margin-right: 0.55em;
+    transform: translateY(-0.12em);
+  }
+  .snark p { margin-bottom: 0.4rem; }
+  .snark p:last-child { margin-bottom: 0; }
+
+  /* ── opinion column ── */
+  .opinion h3 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-align: center; border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 0.4rem; margin-bottom: 0.9rem;
+  }
+  .opinion h2 { font-size: 1.35rem; font-weight: 900; line-height: 1.45; margin-bottom: 0.6rem; }
+  .opinion p { font-size: 0.9rem; margin-bottom: 0.9em; }
+  .opinion .sig { font-size: 0.75rem; color: var(--ink-faint); text-align: right; font-style: italic; }
+  .drop::first-letter {
+    float: left; font-size: 3.2em; line-height: 0.85;
+    padding: 0.08em 0.12em 0 0; font-weight: 900;
+  }
+
+  /* ── footer ── */
+  footer {
+    border-top: 3px double var(--rule-dark); margin-top: 2.5rem; padding-top: 1rem;
+    font-size: 0.76rem; color: var(--ink-faint); line-height: 2;
+  }
+  footer strong { color: var(--ink-soft); }
+
+  @media (max-width: 920px) {
+    .front { grid-template-columns: 1fr 1fr; }
+    .front .col-lead { grid-column: 1 / -1; grid-row: 1; border-left: none; padding-left: 0; border-bottom: 2px solid var(--rule-dark); margin-bottom: 1.3rem; }
+    .front .col-left { border-left: none; padding-left: 0; }
+    .band { grid-template-columns: 1fr 1fr; }
+    .band article:nth-child(odd) { border-left: none; padding-left: 0; }
+    .band article:nth-child(even) { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  }
+  @media (max-width: 600px) {
+    .front, .band { grid-template-columns: 1fr; }
+    .front > * + *, .band article { border-left: none !important; padding-left: 0 !important; }
+    .front .col-op { border-top: 2px solid var(--rule-dark); padding-top: 1.2rem; }
+    nav.sections { gap: 1.1em; letter-spacing: 0.15em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP 與 國際權威媒體</span>
+    <span class="badge">HEAVY DUTY EDITION</span>
+    <span>撈取時間：2026-09-18 08:02 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-09-18</span>
+      <span>定價：巨量 API 呼叫</span>
+    </div>
+    <nav class="sections">
+      <span>政治</span><span>地緣</span><span>科技</span><span>經濟</span><span>社會</span><span>氣候</span><span>人權</span><span>冷眼</span>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <!-- ══ left column ══ -->
+    <section class="col-left">
+      <article class="story">
+        <div class="kicker">AI（含最新功能）</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0075?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">紐約時報控微軟與OpenAI侵權 痛批史上最大規模竊盜</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/3bc4480e-5dfc-4c63-8777-0f6857abd4be.jpg" alt="紐約時報對AI巨頭提告" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>紐約時報對AI巨頭提告，引發AI著作權世紀之戰。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">《紐約時報》正式控告微軟與OpenAI，指控其未經授權使用數百萬篇版權文章訓練AI，稱此為「史上最大規模竊盜」。</p>
+        <div class="byline">民視</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>此案判決將成為AI訓練合法性的關鍵判例，可能迫使AI企業改變資料收集模式或支付鉅額授權費，深遠影響產業發展。</p>
+        </div>
+      </article>
+
+      <article class="story">
+        <div class="kicker">台美股趨勢與事件</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0068?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">三大利多齊聚！華爾街上演大反攻 費半狂飆3％、台指期大漲701點</a></h2>
+        <p class="excerpt">受財報優於預期等利多激勵，美股強勢反彈，費半大漲3%，帶動台指期夜盤狂飆逾700點。</p>
+        <div class="byline">民視</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>緩解了對經濟衰退的恐慌，AI與半導體類股重獲青睞，預示台股短期將迎來強勁的外資回補潮。</p>
+        </div>
+      </article>
+
+    </section>
+
+    <!-- ══ lead column ══ -->
+    <section class="col-lead">
+      <article class="story lead">
+        <div class="kicker">全球經濟 · 頭條</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0102?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">聯準會轉鷹重啟升息 川普任內恐難再見降息局面</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/82598295-abf1-46a8-8340-f04e25dd10b2.jpg" alt="聯準會轉鷹重啟升息" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>聯準會重啟升息，全球金融市場嚴陣以待。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">美國聯準會態度轉向鷹派，宣布重啟升息循環。市場預期在川普任期內，考量通膨與經濟過熱風險，恐難再見到降息政策。</p>
+        <div class="byline">民視 · 2026-09-18</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>此舉將推升全球資金成本，對新興市場貨幣造成強烈貶值壓力，並可能全面重塑全球供應鏈的投資回報率評估。</p>
+          <p><span class="label">觀點</span>鷹派學者認為升息是打擊通膨必要之舉；企業界憂心高利率壓抑投資意願；政治觀察家指出這可能影響期中選舉。</p>
+        </div>
+      </article>
+    </section>
+
+    <!-- ══ opinion column ══ -->
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>版權與霸權：無盡的掠奪</h2>
+        <p class="drop">當《紐約時報》終於將 OpenAI 告上法庭，我們看到的不只是版權之爭，而是人類幾百年來建立的知識產權體系，正面臨演算法赤裸裸的降維打擊。科技巨頭私下承認 AI 將取代新聞業，卻在法庭上高喊「合理使用」，這無疑是 21 世紀最大的數位圈地運動。</p>
+        <p>與此同時，現實世界的霸權爭奪同樣冷酷。聯準會的升息，讓全球資金如同潮水般退去，新興市場再次成為待宰的羔羊。中國在吉布地擴建雷達，美軍在波蘭推進基地，甚至連美國政府網站裡都混入了阿里巴巴的 AI 模型。在這個充滿焦慮的時代，無論是地緣政治還是演算法，都在瘋狂擴張自己的地盤，而普通人，只能在這場雙重收割中，祈求通膨不要再漲。</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ══ massive band ══ -->
+  <section class="band">
+    <div class="band-title">全球深度掃描（影響力新聞 Top 15）</div>
+
+    <article class="story">
+      <div class="kicker">科技與地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0061" target="_blank" rel="noopener">美政府網站驚見中國AI 遭爆用阿里巴巴模型急下架</a></h2>
+      <p class="excerpt">美聯邦政府某網站被發現內部使用阿里巴巴AI模型，引發國安疑慮後已緊急下架調查。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>凸顯開源AI在全球軟體供應鏈滲透極深，將促使美加速制定外國AI技術採購禁令與審查機制。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">AI（含最新功能）</div>
+      <h2><a href="https://www.taiwannews.com.tw/" target="_blank" rel="noopener">台灣數位發展部長訪美 推動「主權AI」與科技巨頭會面</a></h2>
+      <p class="excerpt">台灣數發部長訪華府會晤微軟、OpenAI，主推反映台灣價值觀的「主權AI」。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>將台灣從硬體中心提升至AI軟體與治理的參與者，強化台美先進科技與民主防禦連結。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0056" target="_blank" rel="noopener">美智庫：中國升級吉布地基地 強化監控中東與非洲</a></h2>
+      <p class="excerpt">美智庫衛星影像分析，中國正大幅擴建非洲吉布地軍事基地，強化對中東與非洲監控。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>中國軍力投射範圍擴大，對美軍紅海行動構成情報威脅，加劇非洲之角戰略博弈。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://english.cw.com.tw/" target="_blank" rel="noopener">台灣央行維持利率不變 應對AI與傳產「K型」分歧</a></h2>
+      <p class="excerpt">考量AI熱絡但傳產疲軟的K型復甦，台灣央行維持利率不變以兼顧抗通膨與穩增長。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>反映AI革命造成的兩極化，未來貨幣政策難以一刀切，需輔以更多針對性財政措施。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">氣候及社會議題</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0093" target="_blank" rel="noopener">全球糧食短缺隱憂升溫！主要出口國減產推升穀物大漲</a></h2>
+      <p class="excerpt">受極端氣候影響多個出口國減產，穀物期貨大漲，全球糧食危機擔憂升溫。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>糧價高漲將加劇開發中國家通膨與動盪，恐促使各國重啟糧食出口禁令保護主義。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0074" target="_blank" rel="noopener">金與正痛批美軍演升級局勢 揚言採取更具攻擊性反制</a></h2>
+      <p class="excerpt">北韓金與正強烈抨擊美韓軍演，揚言動用核威懾力量進行更具攻擊性反制。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>推升東亞風險，可能促使美日韓加快軍事同盟整合步伐與區域軍備競賽。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">科技與地緣政治</div>
+      <h2><a href="https://www.thedailystar.net/" target="_blank" rel="noopener">華為面臨AI晶片產能瓶頸 供不應求挑戰加劇</a></h2>
+      <p class="excerpt">受美國管制影響，華為AI晶片產能嚴重受限，中國客戶面臨供貨延遲。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>顯示晶片禁令在遏制中國算力已生實效，迫使中國加快尋求自主供應鏈突圍。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">AI（含最新功能）</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0058" target="_blank" rel="noopener">高層私下認AI取代新聞！微軟OpenAI遭指打臉合理使用</a></h2>
+      <p class="excerpt">法庭文件曝光微軟與OpenAI高層私下坦承AI將取代新聞，重擊其侵權案「合理使用」防線。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>若被採信將徹底改變AI公司成本結構，迫使其必須與全球新聞內容提供者分潤。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0090" target="_blank" rel="noopener">美財長施壓日本緊縮財政與升息 換取聯手阻貶日圓</a></h2>
+      <p class="excerpt">美財長私下要求日本實施緊縮財政與升息，作為聯手干預匯市阻貶日圓的條件。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>日本若大幅升息，可能引發全球數兆美元利差交易資金的歷史性平倉回流。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0049" target="_blank" rel="noopener">美軍擬在波蘭設基地 川普發文證實取得重大進展</a></h2>
+      <p class="excerpt">川普證實美軍在波蘭建立常駐軍事基地計畫取得重大進展，旨在嚇阻俄羅斯。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>此舉將北約防禦前線向東推進，恐引發莫斯科反彈加劇東歐軍事對峙常態化。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">地緣政治</div>
+      <h2><a href="https://www.epc.eu/" target="_blank" rel="noopener">BRICS新德里峰會落幕 聚焦擴容與內部凝聚力平衡</a></h2>
+      <p class="excerpt">第18屆金磚國家峰會落幕，討論擴編後如何維持決策效率與實質經濟科技合作。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>金磚加速打造非美元結算系統與獨立標準，若成型將削弱西方對全球政經絕對主導權。</p>
+      </div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">人權與全球經濟</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026918W0046" target="_blank" rel="noopener">沙烏地與青年運動戰火擴大 葉門難民逃難波及油運</a></h2>
+      <p class="excerpt">沙烏地與葉門青年運動武裝衝突升級，引發難民潮並嚴重威脅紅海原油運輸安全。</p>
+      <div class="snark">
+        <p><span class="label">戰略</span>紅海動盪將推升全球能源運輸成本，若衝突持續恐引發新一波由能源價格驅動的全球通膨。</p>
+      </div>
+    </article>
+
+  </section>
+
+  <footer>
+    <p><strong>關於本頁</strong>：這是一個整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙生成。新聞素材於 2026 年 9 月 18 日透過 <strong>Mesh MCP</strong> 擷取（全領域重裝版）。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+</body>
+</html>

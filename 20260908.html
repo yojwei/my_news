@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --ink: #121212;
+    --ink-soft: #333;
+    --ink-faint: #5a5a5a;
+    --rule: #dcdcdc;
+    --rule-dark: #121212;
+    --paper: #fdfdf9;
+    --accent: #8b0000;
+    --serif: "Noto Serif TC", Georgia, "Times New Roman", serif;
+  }
+  * { box-sizing: border-box; margin: 0; padding: 0; }
+  body {
+    background: var(--paper);
+    color: var(--ink);
+    font-family: var(--serif);
+    line-height: 1.75;
+    padding: 0 1.25rem 4rem;
+  }
+  a { color: inherit; text-decoration: none; }
+  a:hover { text-decoration: underline; text-underline-offset: 3px; }
+  .sheet { max-width: 1200px; margin: 0 auto; }
+
+  /* ── top bar ── */
+  .topbar {
+    display: flex; justify-content: space-between; align-items: center;
+    font-size: 0.72rem; letter-spacing: 0.05em; color: var(--ink-faint);
+    border-bottom: 1px solid var(--rule);
+    padding: 0.5rem 0;
+  }
+  .topbar .badge {
+    border: 1px solid var(--accent); color: var(--accent);
+    padding: 0 0.5em; font-weight: 600; letter-spacing: 0.15em;
+  }
+
+  /* ── masthead ── */
+  .masthead { text-align: center; padding: 1.6rem 0 0.9rem; }
+  .masthead h1 {
+    font-family: "UnifrakturCook", var(--serif);
+    font-size: clamp(2.6rem, 7.5vw, 5.2rem);
+    font-weight: 700; line-height: 1.05; letter-spacing: 0.01em;
+  }
+  .masthead .zh {
+    font-size: 0.95rem; letter-spacing: 1.2em; text-indent: 1.2em;
+    color: var(--ink-soft); margin-top: 0.35rem; font-weight: 600;
+  }
+  .masthead .motto {
+    font-size: 0.75rem; font-style: italic; color: var(--ink-faint); margin-top: 0.4rem;
+  }
+  .dateline {
+    display: flex; justify-content: space-between; align-items: center;
+    border-top: 2px solid var(--rule-dark); border-bottom: 1px solid var(--rule-dark);
+    font-size: 0.74rem; letter-spacing: 0.08em; padding: 0.3rem 0.2rem;
+    margin-top: 0.9rem;
+  }
+  nav.sections {
+    display: flex; justify-content: center; gap: 2.2em; flex-wrap: wrap;
+    font-size: 0.8rem; font-weight: 600; letter-spacing: 0.3em; text-indent: 0.3em;
+    border-bottom: 3px double var(--rule-dark);
+    padding: 0.45rem 0; margin-bottom: 1.6rem;
+  }
+
+  /* ── grid ── */
+  .front {
+    display: grid; gap: 0 1.6rem;
+    grid-template-columns: 1fr 1.9fr 1.15fr;
+  }
+  .front > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band {
+    display: grid; gap: 0 1.6rem; grid-template-columns: repeat(3, 1fr);
+    border-top: 2px solid var(--rule-dark); margin-top: 2rem; padding-top: 1.3rem;
+  }
+  .band > * + * { border-left: 1px solid var(--rule); padding-left: 1.6rem; }
+  .band-title {
+    grid-column: 1 / -1; font-size: 0.78rem; font-weight: 700;
+    letter-spacing: 0.35em; text-indent: 0.35em; color: var(--ink-soft);
+    margin-bottom: 0.9rem;
+  }
+
+  /* ── story ── */
+  article.story { margin-bottom: 1.7rem; }
+  .kicker {
+    font-size: 0.68rem; font-weight: 700; letter-spacing: 0.25em;
+    color: var(--accent); margin-bottom: 0.3rem;
+  }
+  .story h2 { font-weight: 900; line-height: 1.42; font-size: 1.22rem; margin-bottom: 0.45rem; }
+  .story.lead h2 { font-size: clamp(1.6rem, 3.2vw, 2.2rem); line-height: 1.38; }
+  .story h2 a:hover { text-decoration-thickness: 2px; }
+  .excerpt { font-size: 0.92rem; color: var(--ink-soft); margin-bottom: 0.55rem; }
+  .byline { font-size: 0.7rem; letter-spacing: 0.06em; color: var(--ink-faint); }
+  .byline a { border-bottom: 1px dotted var(--ink-faint); }
+  figure { margin: 0 0 0.8rem; }
+  figure img { width: 100%; display: block; filter: saturate(0.85); background: #eee; min-height: 200px; }
+  figcaption { font-size: 0.7rem; color: var(--ink-faint); padding-top: 0.3rem; line-height: 1.6; }
+
+  /* ── snark ── */
+  .snark {
+    border-top: 1px solid var(--rule-dark);
+    margin-top: 0.7rem; padding-top: 0.45rem;
+    font-size: 0.85rem; line-height: 1.8; color: var(--ink);
+  }
+  .snark .label {
+    display: inline-block; font-style: normal; font-weight: 700;
+    font-size: 0.62rem; letter-spacing: 0.28em;
+    color: var(--paper); background: var(--ink);
+    padding: 0.05em 0.6em 0.05em 0.75em; margin-right: 0.55em;
+    transform: translateY(-0.12em);
+  }
+  .snark em { font-style: normal; border-bottom: 3px double var(--rule-dark); }
+
+  /* ── opinion column ── */
+  .opinion h3 {
+    font-size: 0.78rem; font-weight: 700; letter-spacing: 0.3em; text-indent: 0.3em;
+    text-align: center; border-bottom: 1px solid var(--rule-dark);
+    padding-bottom: 0.4rem; margin-bottom: 0.9rem;
+  }
+  .opinion h2 { font-size: 1.35rem; font-weight: 900; line-height: 1.45; margin-bottom: 0.6rem; }
+  .opinion p { font-size: 0.9rem; margin-bottom: 0.9em; }
+  .opinion .sig { font-size: 0.75rem; color: var(--ink-faint); text-align: right; font-style: italic; }
+  .drop::first-letter {
+    float: left; font-size: 3.2em; line-height: 0.85;
+    padding: 0.08em 0.12em 0 0; font-weight: 900;
+  }
+
+  /* ── footer ── */
+  footer {
+    border-top: 3px double var(--rule-dark); margin-top: 2.5rem; padding-top: 1rem;
+    font-size: 0.76rem; color: var(--ink-faint); line-height: 2;
+  }
+  footer strong { color: var(--ink-soft); }
+
+  @media (max-width: 920px) {
+    .front { grid-template-columns: 1fr 1fr; }
+    .front .col-lead { grid-column: 1 / -1; grid-row: 1; border-left: none; padding-left: 0; border-bottom: 2px solid var(--rule-dark); margin-bottom: 1.3rem; }
+    .front .col-left { border-left: none; padding-left: 0; }
+    .band { grid-template-columns: 1fr; }
+    .band > * + * { border-left: none; padding-left: 0; border-top: 1px solid var(--rule); padding-top: 1.1rem; }
+  }
+  @media (max-width: 600px) {
+    .front { grid-template-columns: 1fr; }
+    .front > * + * { border-left: none; padding-left: 0; }
+    .front .col-op { border-top: 2px solid var(--rule-dark); padding-top: 1.2rem; }
+    nav.sections { gap: 1.1em; letter-spacing: 0.15em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP</span>
+    <span class="badge">DAILY BRIEFING</span>
+    <span>撈取時間：2026-09-08 15:20 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-09-08</span>
+      <span>定價：一次 API 呼叫</span>
+    </div>
+    <nav class="sections">
+      <span>政治</span><span>地緣</span><span>科技</span><span>經濟</span><span>社會</span><span>冷眼</span>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <!-- ══ left column ══ -->
+    <section class="col-left">
+      <article class="story">
+        <div class="kicker">地緣 · 兩國方案</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0431" target="_blank" rel="noopener">英國挺兩國方案 將宣布禁止進口以色列西岸屯墾區商品</a></h2>
+        <p class="excerpt">英國政府表態支持以巴「兩國方案」，並計畫宣布禁止進口來自以色列約旦河西岸屯墾區的商品，以此對以色列的擴張政策施加實質經濟壓力。</p>
+        <div class="byline">Mesh MCP</div>
+        <div class="snark"><span class="label">解析</span>英國此舉從過去的口頭呼籲轉向具體的貿易制裁，反映出歐洲國家在區域安全與人權議題上，對以色列極右翼政府的容忍度已達臨界點。</div>
+      </article>
+      
+      <article class="story">
+        <div class="kicker">地緣 · 烏克蘭</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0120" target="_blank" rel="noopener">烏克蘭檢察總長請辭 坦言不願淪為政治對抗工具</a></h2>
+        <p class="excerpt">烏克蘭檢察總長宣布辭職，直言不願淪為國內政治角力與派系對抗的工具。此舉凸顯在戰時狀態下，烏克蘭內部反貪腐與司法獨立仍面臨龐大政治壓力。</p>
+        <div class="byline">Mesh MCP</div>
+        <div class="snark"><span class="label">解析</span>戰時的一致對外，終究掩蓋不住權力結構的內在矛盾。司法首長以「不願淪為工具」為由掛冠，暗示基輔高層的權力洗牌與法治危機正在暗處湧動。</div>
+      </article>
+    </section>
+
+    <!-- ══ lead column ══ -->
+    <section class="col-lead">
+      <article class="story lead">
+        <div class="kicker">社會 · 頭條</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0027" target="_blank" rel="noopener">德國極右翼邦選舉勝出 數千人湧入柏林抗議民主危機</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/c8de4fe3-38fa-4b18-8f17-e7be63337d2a.jpg" alt="德國民眾湧入柏林街頭抗議" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>德國民眾湧入柏林街頭，抗議極右翼政黨在邦選舉中大勝。（圖：Mesh MCP）</figcaption>
+        </figure>
+        <p class="excerpt">德國極右翼政黨（AfD）在東部邦選舉中取得歷史性勝利，引發數千民眾湧入柏林街頭抗議。移民社群對未來去留深感擔憂，德國總理坦言震驚但誓言持續推動改革。</p>
+        <div class="byline">Mesh MCP · 2026-09-08</div>
+        <div class="snark"><span class="label">解析</span>極右翼在德國地方選舉的突破不再是邊緣現象，而是直接叩關憲政體制的警鐘。當反移民與民粹情緒透過民主選舉取得正當性，傳統政黨的防火牆正逐漸崩塌。</div>
+      </article>
+    </section>
+
+    <!-- ══ opinion column ══ -->
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>寂靜的台灣政壇，燃燒的歐陸與算力</h2>
+        <p class="drop">今日的《大昌日報》版面上，您將找不到一則台灣國內政治的新聞。原因很簡單：過去 24 小時內，國內充滿了言語交鋒，卻缺乏實質的法案、預算或制度變動。本報拒絕將口水戰升級為頭條。</p>
+        <p>相反地，國際局勢正迎來深層的結構震撼。在歐陸，極右翼透過民主選舉反噬民主體制，英國反移民怒火與西岸屯墾區制裁交織；而在虛擬世界，法國開源巨頭 Mistral 獲得創紀錄的 30 億歐元鉅資，南韓則為了支撐龐大的 AI 算力開始重估核能基建。</p>
+        <p>當台灣在政治口水中原地踏步時，世界的實體疆界與虛擬基礎設施，正以前所未有的速度被重新劃定。</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <!-- ══ second band ══ -->
+  <section class="band">
+    <div class="band-title">科技突破與社會衝突</div>
+
+    <article class="story">
+      <div class="kicker">科技 · 歐洲開源</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0353" target="_blank" rel="noopener">法國AI公司Mistral獲30億歐元融資 估值破210億歐元</a></h2>
+      <p class="excerpt">法國開源人工智慧新創 Mistral 宣布獲得 30 億歐元鉅額融資，企業估值突破 210 億歐元。此舉不僅創下募資紀錄，也鞏固其作為歐洲對抗美國 AI 巨頭的底層架構核心地位。</p>
+      <div class="byline">Mesh MCP</div>
+      <div class="snark"><span class="label">解析</span>Mistral 的崛起是歐洲捍衛「數位主權」與「開源精神」的關鍵戰役。在美國封閉模型的夾擊下，這筆巨資證明了市場對 AI 底層架構多樣性的強烈渴求。</div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">科技 · 算力基建</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0428" target="_blank" rel="noopener">AI熱潮帶動用電暴增 南韓研擬擴大核能應對</a></h2>
+      <p class="excerpt">隨著全球 AI 產業發展導致算力需求與資料中心用電量呈指數級增長，南韓政府正研擬擴大核能發電占比，以解決迫在眉睫的能源基建挑戰與碳排放問題。</p>
+      <div class="byline">Mesh MCP</div>
+      <div class="snark"><span class="label">解析</span>AI 的盡頭是算力，算力的盡頭是電力。南韓的政策轉向揭示了殘酷的物理現實：虛擬運算的典範轉移，必須建立在最傳統、最硬核的能源基礎設施擴張之上。</div>
+    </article>
+
+    <article class="story">
+      <div class="kicker">社會 · 英國抗爭</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026908W0038" target="_blank" rel="noopener">英國爆發反移民抗爭 首相譴責毒素政治</a></h2>
+      <p class="excerpt">英國多地爆發反移民抗議活動，社會對立加劇。英國首相公開譴責此類散播仇恨與對立的「毒素政治」，呼籲回歸理性對話，避免極端情緒撕裂社會。</p>
+      <div class="byline">Mesh MCP</div>
+      <div class="snark"><span class="label">解析</span>從德國到英國，反移民聲浪的共振顯示歐洲正處於身分認同與經濟分配的雙重焦慮中。政客的口頭譴責若缺乏有效的社經解方，終將淪為無力的道德呼籲。</div>
+    </article>
+
+  </section>
+
+  <footer>
+    <p><strong>關於本頁</strong>：這是一個整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙生成。新聞素材於 2026 年 9 月 8 日透過 <strong>Mesh MCP</strong> 擷取。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+</body>
+</html>

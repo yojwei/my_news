@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報｜載入今日版…</title>
+<noscript><meta http-equiv="refresh" content="0; url=20261014.html"></noscript>
+<style>
+  body { font-family: "Noto Serif TC", Georgia, serif; background:#fdfdf9; color:#121212; display:flex; min-height:100vh; align-items:center; justify-content:center; margin:0; text-align:center; }
+  h1 { font-size:2.4rem; margin:0 0 .5rem; }
+  p { color:#5a5a5a; font-size:.9rem; }
+  a { color:#8b0000; }
+</style>
+</head>
+<body>
+<div>
+  <h1>大昌日報</h1>
+  <p id="msg">正在前往今日版…</p>
+  <p><a id="fallback" href="20261014.html">若沒有自動跳轉，請點此閱讀最新一期</a></p>
+</div>
+<script>
+(function () {
+  // 以台北時間計算「今天」，往回最多找 14 天，導向第一個存在的日報。
+  var FALLBACK = '20261014.html'; // 本機開檔(file://)或網路失敗時使用
+  function taipeiDate(offsetDays) {
+    var now = new Date(Date.now() + 8 * 3600 * 1000 - offsetDays * 86400 * 1000);
+    var y = now.getUTCFullYear();
+    var m = String(now.getUTCMonth() + 1).padStart(2, '0');
+    var d = String(now.getUTCDate()).padStart(2, '0');
+    return y + m + d;
+  }
+  function go(file) { location.replace(file); }
+  if (location.protocol === 'file:') { go(FALLBACK); return; }
+  var i = 0;
+  function tryNext() {
+    if (i > 14) { go(FALLBACK); return; }
+    var file = taipeiDate(i) + '.html';
+    fetch(file, { method: 'HEAD', cache: 'no-store' }).then(function (r) {
+      if (r.ok) {
+        if (i > 0) document.getElementById('msg').textContent = '今日版尚未出刊，前往最近一期…';
+        go(file);
+      } else { i++; tryNext(); }
+    }).catch(function () { go(FALLBACK); });
+  }
+  tryNext();
+})();
+</script>
+</body>
+</html>

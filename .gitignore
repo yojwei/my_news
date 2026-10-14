@@ -1,0 +1,12 @@
+# Logs & Temporary Files
+*.log
+agy_task_log.txt
+
+# Scripts
+*.ps1
+*.vbs
+*.bat
+
+# System Files
+Thumbs.db
+.DS_Store
