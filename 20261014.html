@@ -29,6 +29,11 @@
   nav.sections button.highlight.active { background:var(--accent); border-bottom-color:var(--accent); color:var(--paper); }
   .front { display:grid; gap:0 1.6rem; grid-template-columns:1fr 1.9fr 1.15fr; }
   .front > * + * { border-left:1px solid var(--rule); padding-left:1.6rem; }
+  .front.opinion-only { display:block; max-width:800px; margin:0 auto; padding:1rem 0; }
+  .front.opinion-only .col-op { border-left:none !important; padding-left:0 !important; }
+  .front.opinion-only .col-op h3 { font-size:1.05rem; letter-spacing:.35em; text-indent:.35em; padding-bottom:.6rem; margin-bottom:1.5rem; }
+  .front.opinion-only .col-op h2 { font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.4; margin-bottom:1.2rem; }
+  .front.opinion-only .col-op p { font-size:1.02rem; line-height:2.05; margin-bottom:1.2em; }
   .band { display:grid; gap:2rem 1.6rem; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--rule-dark); margin-top:2rem; padding-top:1.3rem; }
   .band article:not(:nth-child(3n+2)) { border-left:none; padding-left:0; }
   .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left:1px solid var(--rule); padding-left:1.6rem; }
@@ -64,6 +69,7 @@
   @media (max-width:600px) {
     .front, .band { grid-template-columns:1fr; }
     .front > * + *, .band article { border-left:none !important; padding-left:0 !important; }
+    .front .col-op { border-top:2px solid var(--rule-dark); padding-top:1.2rem; }
     nav.sections button { letter-spacing:.1em; }
   }
 </style>
@@ -88,6 +94,7 @@
     </div>
     <nav class="sections" id="nav-sections">
       <button class="active" data-filter="all">全部</button>
+      <button class="highlight" data-filter="opinion">冷眼 · 本報編輯室</button>
       <button class="highlight" data-filter="台灣政治">台灣政治</button>
       <button data-filter="國防兩岸">國防兩岸</button>
       <button data-filter="國安">國安</button>
@@ -281,22 +288,48 @@
 (function () {
   var buttons = document.querySelectorAll('#nav-sections button');
   var articles = document.querySelectorAll('article.story');
-  var blocks = [document.querySelector('.col-left'), document.querySelector('.col-lead'), document.querySelector('.band')];
+  var colLeft = document.querySelector('.col-left');
+  var colLead = document.querySelector('.col-lead');
+  var band = document.querySelector('.band');
   var main = document.querySelector('main.front');
   var opinion = document.querySelector('.col-op');
+  var emptyNote = document.getElementById('empty-note');
+
   function apply(filter) {
-    articles.forEach(function (a) {
-      a.style.display = (filter === 'all' || a.dataset.category === filter) ? '' : 'none';
+    if (filter === 'opinion') {
+      articles.forEach(function (a) { a.style.display = 'none'; });
+      if (colLeft) colLeft.style.display = 'none';
+      if (colLead) colLead.style.display = 'none';
+      if (band) band.style.display = 'none';
+      if (opinion) opinion.style.display = 'block';
+      if (main) main.classList.add('opinion-only');
+      if (emptyNote) emptyNote.style.display = 'none';
+    } else {
+      if (main) main.classList.remove('opinion-only');
+      if (opinion) opinion.style.display = (filter === 'all') ? '' : 'none';
+
+      articles.forEach(function (a) {
+        a.style.display = (filter === 'all' || a.dataset.category === filter) ? '' : 'none';
+      });
+
+      var total = 0;
+      [colLeft, colLead, band].forEach(function (b) {
+        if (!b) return;
+        var vis = Array.prototype.some.call(b.querySelectorAll('article.story'), function (a) {
+          return a.style.display !== 'none';
+        });
+        b.style.display = vis ? '' : 'none';
+        if (vis) total++;
+      });
+
+      if (emptyNote) emptyNote.style.display = (total === 0) ? 'block' : 'none';
+    }
+
+    buttons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.filter === filter);
     });
-    var total = 0;
-    blocks.forEach(function (b) {
-      var vis = Array.prototype.some.call(b.querySelectorAll('article.story'), function (a) { return a.style.display !== 'none'; });
-      b.style.display = vis ? '' : 'none';
-      if (vis) total++;
-    });
-    document.getElementById('empty-note').style.display = total === 0 ? 'block' : 'none';
-    buttons.forEach(function (btn) { btn.classList.toggle('active', btn.dataset.filter === filter); });
   }
+
   buttons.forEach(function (btn) {
     btn.addEventListener('click', function () { apply(btn.dataset.filter); });
   });
