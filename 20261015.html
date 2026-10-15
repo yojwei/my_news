@@ -34,6 +34,8 @@
   .front.opinion-only .col-op h3 { font-size:1.05rem; letter-spacing:.35em; text-indent:.35em; padding-bottom:.6rem; margin-bottom:1.5rem; }
   .front.opinion-only .col-op h2 { font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.4; margin-bottom:1.2rem; }
   .front.opinion-only .col-op p { font-size:1.02rem; line-height:2.05; margin-bottom:1.2em; }
+  .front.lead-hidden { display:block; max-width:800px; margin:0 auto 1.5rem; }
+  .front.lead-hidden .col-left { border-left:none !important; padding-left:0 !important; }
   .band { display:grid; gap:2rem 1.6rem; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--rule-dark); margin-top:2rem; padding-top:1.3rem; }
   .band article:not(:nth-child(3n+2)) { border-left:none; padding-left:0; }
   .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left:1px solid var(--rule); padding-left:1.6rem; }
@@ -133,6 +135,22 @@
         <div class="snark">
           <p><span class="label">戰略</span>凸顯現代不對稱作戰對商業寡頭衛星網路的致命依賴，低軌衛星不再只是通訊基建，更成為大國外交施壓與戰略掣肘的搖控開關。</p>
         </div>
+      </article>
+
+      <article class="story" data-category="台美股" data-nav-only="true">
+        <div class="kicker">台美股 · 籌碼動向</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A14W0786" target="_blank" rel="noopener">外資持續提款倒貨 台股兩萬點多空交戰 三大利空測試支撐</a></h2>
+        <p class="excerpt">受中東戰雲與高油價推升通膨疑慮影響，外資在台股期現貨持續同步偏空操作，大舉提款調節電子權值股。分析師指出高估值修正、美債殖利率回升與外資空單創高三大利空齊聚，兩萬點整數關卡將面臨嚴峻回測考驗。</p>
+        <div class="byline">民視 / 彭博社</div>
+        <div class="snark"><p><span class="label">戰略</span>資金回流美元資產加劇新興亞股失血，短線權值股承壓；需觀察台積電法說指引能否挽回市場對AI資本支出放緩的疑慮。</p></div>
+      </article>
+
+      <article class="story" data-category="台美股" data-nav-only="true">
+        <div class="kicker">台美股 · 美股盤勢</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A15W0038" target="_blank" rel="noopener">美通膨超預期升溫美元走強 那斯達克重挫近2% 科技權值股全面承壓</a></h2>
+        <p class="excerpt">美國9月CPI跳升推升市場對聯準會年底前進一步降息的悲觀預期，美債殖利率反彈，美股四大指數全面跳水，那斯達克重挫1.88%，微軟、輝達與蘋果等重量級科技股全面收黑。</p>
+        <div class="byline">民視 / 華爾街日報</div>
+        <div class="snark"><p><span class="label">戰略</span>估值模型面臨無風險利率走高的雙重壓力，科技股由本益比擴張轉向檢視實質獲利交付能力，短線防禦性板塊相對抗跌。</p></div>
       </article>
     </section>
 
@@ -244,14 +262,21 @@
       if (colLead) colLead.style.display = 'none';
       if (band) band.style.display = 'none';
       if (opinion) opinion.style.display = 'block';
-      if (main) main.classList.add('opinion-only');
+      if (main) {
+        main.classList.add('opinion-only');
+        main.classList.remove('lead-hidden');
+      }
       if (emptyNote) emptyNote.style.display = 'none';
     } else {
       if (main) main.classList.remove('opinion-only');
       if (opinion) opinion.style.display = (filter === 'all') ? '' : 'none';
 
       articles.forEach(function (a) {
-        a.style.display = (filter === 'all' || a.dataset.category === filter) ? '' : 'none';
+        if (filter === 'all') {
+          a.style.display = a.dataset.navOnly === 'true' ? 'none' : '';
+        } else {
+          a.style.display = (a.dataset.category === filter) ? '' : 'none';
+        }
       });
 
       var total = 0;
@@ -263,6 +288,10 @@
         b.style.display = vis ? '' : 'none';
         if (vis) total++;
       });
+
+      if (main) {
+        main.classList.toggle('lead-hidden', colLead && colLead.style.display === 'none' && colLeft && colLeft.style.display !== 'none');
+      }
 
       if (emptyNote) emptyNote.style.display = (total === 0) ? 'block' : 'none';
     }
