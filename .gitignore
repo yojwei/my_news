@@ -11,5 +11,10 @@ agy_task_log.txt
 Thumbs.db
 .DS_Store
 
+# Environment Configurations
+.env
+!.env.example
+.pangu-id
+
 # Allow project Agent guide
 !AGENTS.md

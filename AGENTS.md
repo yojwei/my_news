@@ -98,27 +98,35 @@ Agent 應透過 `call_mcp_tool` 呼叫 `mesh-news` 伺服器之以下 API：
 
 當接收到「出刊」、「產生日報」、「發刊」或每日 08:00 排程觸發時，請依照下列流程執行：
 
-1. **新聞擷取**：
-   * 先呼叫 `mesh-news` 的 `list_latest_news`（`limit: 40`）取得全盤新聞池。
+1. **讀取環境設定（`.env`）**：
+   * Agent 執行任務前，優先讀取專案根目錄之 `.env`（若無則讀取 `.env.example`）。
+   * 根據設定檔動態調整各項參數：
+     * `TOTAL_STORIES_COUNT`（預設 9 篇）、`ENABLE_EDITORIAL`（預設 true）。
+     * `STOCK_STORIES_MAIN`（預設 1 篇）、`STOCK_STORIES_NAV_EXPAND`（預設 3 篇）。
+     * `TAIWAN_POLITICS_COUNT`（預設 2 篇）。
+     * `EXCLUDED_KEYWORDS`（嚴格過濾清單）。
+     * `GIT_REMOTE` 與 `GIT_BRANCH`。
+2. **新聞擷取**：
+   * 先呼叫 `mesh-news` 的 `list_latest_news`（依據 `FETCH_NEWS_LIMIT`，預設 40）取得全盤新聞池。
    * 針對「台灣政治」與「台美股」，視需要呼叫 `search_news` 或 `search_web` 補齊優質報導。
    * 對選定的頭條與焦點新聞，調用 `get_news` 取得完整內文與正確圖片連結。
-2. **策展挑選與撰寫**：
-   * 挑選 9 則符合配比之優質新聞（嚴格執行負面清單過濾）。
+3. **策展挑選與撰寫**：
+   * 挑選符合配置篇數之優質新聞（嚴格依據 `EXCLUDED_KEYWORDS` 進行負面題材過濾）。
    * 每則新聞撰寫精確摘要（`excerpt`）與本報專屬的洞察剖析（`snark` 包含 `<span class="label">戰略</span>`）。
    * 撰寫一篇深度獨立社評（800~1200 字）。
-3. **生成今日檔案**：
+4. **生成今日檔案**：
    * 檔名統一為 `YYYYMMDD.html`（例如 `20261022.html`，以台北時間 Date 為準）。
-4. **更新首頁跳轉**：
+5. **更新首頁跳轉**：
    * 修改 `index.html` 中的 fallback 檔案路徑與 `<meta http-equiv="refresh">` 標籤，指向當日最新檔案。
-5. **發布與推送**：
+6. **發布與推送**：
    * 執行：
      ```powershell
      git add YYYYMMDD.html index.html
      git commit -m "Publish Ta Chang Daily: YYYYMMDD (Golden 9 Edition)"
      git push origin main
      ```
-6. **回報**：
-   * 向使用者提供線上直接閱讀連結（`https://yojwei.github.io/my_news/YYYYMMDD.html`）與今日重點摘要。
+7. **回報**：
+   * 向使用者提供線上直接閱讀連結（`${BASE_URL}/YYYYMMDD.html`）與今日重點摘要。
 
 ---
 
