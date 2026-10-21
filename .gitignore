@@ -10,3 +10,6 @@ agy_task_log.txt
 # System Files
 Thumbs.db
 .DS_Store
+
+# Allow project Agent guide
+!AGENTS.md
