@@ -1,0 +1,302 @@
+<!DOCTYPE html>
+<html lang="zh-Hant-TW">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>大昌日報</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=UnifrakturCook:wght@700&family=Noto+Serif+TC:wght@400;600;700;900&display=swap" rel="stylesheet">
+<style>
+  :root { --ink:#121212; --ink-soft:#333; --ink-faint:#5a5a5a; --rule:#dcdcdc; --rule-dark:#121212; --paper:#fdfdf9; --accent:#8b0000; --serif:"Noto Serif TC",Georgia,"Times New Roman",serif; }
+  * { box-sizing:border-box; margin:0; padding:0; }
+  body { background:var(--paper); color:var(--ink); font-family:var(--serif); line-height:1.75; padding:0 1.25rem 4rem; }
+  a { color:inherit; text-decoration:none; }
+  a:hover { text-decoration:underline; text-underline-offset:3px; }
+  .sheet { max-width:1200px; margin:0 auto; }
+  .topbar { display:flex; justify-content:space-between; align-items:center; font-size:.72rem; letter-spacing:.05em; color:var(--ink-faint); border-bottom:1px solid var(--rule); padding:.5rem 0; }
+  .topbar .badge { border:1px solid var(--accent); color:var(--accent); padding:0 .5em; font-weight:600; letter-spacing:.15em; }
+  .masthead { text-align:center; padding:1.6rem 0 .9rem; }
+  .masthead h1 { font-family:"UnifrakturCook",var(--serif); font-size:clamp(2.6rem,7.5vw,5.2rem); font-weight:700; line-height:1.05; }
+  .masthead .zh { font-size:.95rem; letter-spacing:1.2em; text-indent:1.2em; color:var(--ink-soft); margin-top:.35rem; font-weight:600; }
+  .masthead .motto { font-size:.75rem; font-style:italic; color:var(--ink-faint); margin-top:.4rem; }
+  .dateline { display:flex; justify-content:space-between; align-items:center; border-top:2px solid var(--rule-dark); border-bottom:1px solid var(--rule-dark); font-size:.74rem; letter-spacing:.08em; padding:.3rem .2rem; margin-top:.9rem; }
+  nav.sections { display:flex; justify-content:center; gap:.5em 1.2em; flex-wrap:wrap; border-bottom:3px double var(--rule-dark); padding:.5rem 0; margin-bottom:1.6rem; }
+  nav.sections button { background:none; border:0; border-bottom:2px solid transparent; font-family:var(--serif); font-size:.8rem; font-weight:600; letter-spacing:.25em; text-indent:.25em; color:var(--ink); cursor:pointer; padding:.15em .2em; }
+  nav.sections button:hover { border-bottom-color:var(--ink-faint); }
+  nav.sections button.highlight { color:var(--accent); }
+  nav.sections button.active { border-bottom-color:var(--ink); background:var(--ink); color:var(--paper); }
+  nav.sections button.highlight.active { background:var(--accent); border-bottom-color:var(--accent); color:var(--paper); }
+  .front { display:grid; gap:0 1.6rem; grid-template-columns:1fr 1.9fr 1.15fr; }
+  .front > * + * { border-left:1px solid var(--rule); padding-left:1.6rem; }
+  .front.opinion-only { display:block; max-width:800px; margin:0 auto; padding:1rem 0; }
+  .front.opinion-only .col-op { border-left:none !important; padding-left:0 !important; }
+  .front.opinion-only .col-op h3 { font-size:1.05rem; letter-spacing:.35em; text-indent:.35em; padding-bottom:.6rem; margin-bottom:1.5rem; }
+  .front.opinion-only .col-op h2 { font-size:clamp(1.7rem,3.4vw,2.3rem); line-height:1.4; margin-bottom:1.2rem; }
+  .front.opinion-only .col-op p { font-size:1.02rem; line-height:2.05; margin-bottom:1.2em; }
+  .front.lead-hidden { display:block; max-width:800px; margin:0 auto 1.5rem; }
+  .front.lead-hidden .col-left { border-left:none !important; padding-left:0 !important; }
+  .band { display:grid; gap:2rem 1.6rem; grid-template-columns:repeat(3,1fr); border-top:2px solid var(--rule-dark); margin-top:2rem; padding-top:1.3rem; }
+  .band article:not(:nth-child(3n+2)) { border-left:none; padding-left:0; }
+  .band article:nth-child(3n+2), .band article:nth-child(3n+3) { border-left:1px solid var(--rule); padding-left:1.6rem; }
+  .band-title { grid-column:1/-1; font-size:.78rem; font-weight:700; letter-spacing:.35em; text-indent:.35em; color:var(--ink-soft); margin-bottom:.9rem; border-bottom:1px solid var(--rule-dark); padding-bottom:.5rem; }
+  article.story { margin-bottom:1.7rem; }
+  .kicker { font-size:.68rem; font-weight:700; letter-spacing:.25em; color:var(--accent); margin-bottom:.3rem; }
+  .story h2 { font-weight:900; line-height:1.42; font-size:1.22rem; margin-bottom:.45rem; }
+  .story.lead h2 { font-size:clamp(1.6rem,3.2vw,2.2rem); line-height:1.38; }
+  .excerpt { font-size:.92rem; color:var(--ink-soft); margin-bottom:.55rem; }
+  .byline { font-size:.7rem; letter-spacing:.06em; color:var(--ink-faint); }
+  figure { margin:0 0 .8rem; }
+  figure img { width:100%; display:block; filter:saturate(.85); background:#eee; min-height:200px; }
+  figcaption { font-size:.7rem; color:var(--ink-faint); padding-top:.3rem; line-height:1.6; }
+  .snark { border-top:1px solid var(--rule-dark); margin-top:.7rem; padding-top:.45rem; font-size:.85rem; line-height:1.8; }
+  .snark .label { display:inline-block; font-weight:700; font-size:.62rem; letter-spacing:.28em; color:var(--paper); background:var(--ink); padding:.05em .6em .05em .75em; margin-right:.55em; transform:translateY(-.12em); }
+  .snark p { margin-bottom:.4rem; }
+  .snark p:last-child { margin-bottom:0; }
+  .opinion h3 { font-size:.78rem; font-weight:700; letter-spacing:.3em; text-indent:.3em; text-align:center; border-bottom:1px solid var(--rule-dark); padding-bottom:.4rem; margin-bottom:.9rem; }
+  .opinion h2 { font-size:1.35rem; font-weight:900; line-height:1.45; margin-bottom:.6rem; }
+  .opinion p { font-size:.9rem; margin-bottom:.9em; }
+  .opinion .sig { font-size:.75rem; color:var(--ink-faint); text-align:right; font-style:italic; }
+  .drop::first-letter { float:left; font-size:3.2em; line-height:.85; padding:.08em .12em 0 0; font-weight:900; }
+  .empty-note { display:none; text-align:center; color:var(--ink-faint); padding:2rem 0; font-size:.9rem; }
+  footer { border-top:3px double var(--rule-dark); margin-top:2.5rem; padding-top:1rem; font-size:.76rem; color:var(--ink-faint); line-height:2; }
+  @media (max-width:920px) {
+    .front { grid-template-columns:1fr 1fr; }
+    .front .col-lead { grid-column:1/-1; grid-row:1; border-left:none; padding-left:0; border-bottom:2px solid var(--rule-dark); margin-bottom:1.3rem; }
+    .front .col-left { border-left:none; padding-left:0; }
+    .band { grid-template-columns:1fr 1fr; }
+    .band article:nth-child(odd) { border-left:none; padding-left:0; }
+    .band article:nth-child(even) { border-left:1px solid var(--rule); padding-left:1.6rem; }
+  }
+  @media (max-width:600px) {
+    .front, .band { grid-template-columns:1fr; }
+    .front > * + *, .band article { border-left:none !important; padding-left:0 !important; }
+    .front .col-op { border-top:2px solid var(--rule-dark); padding-top:1.2rem; }
+    nav.sections button { letter-spacing:.1em; }
+  }
+</style>
+</head>
+<body>
+<div class="sheet">
+
+  <div class="topbar">
+    <span>新聞來源：Mesh MCP 與 國際權威媒體</span>
+    <span class="badge">GOLDEN 9 EDITION</span>
+    <span>撈取時間：2026-10-23 08:00 台北</span>
+  </div>
+
+  <header class="masthead">
+    <h1>大昌日報</h1>
+    <div class="zh">Ta Chang Daily</div>
+    <div class="motto">“All the News That's Fit to Scrape.” — 凡撈得到的，皆宜刊印</div>
+    <div class="dateline">
+      <span>第 1 卷 · 日報</span>
+      <span id="header-date">2026-10-23</span>
+      <span>定價：巨量 API 呼叫</span>
+    </div>
+    <nav class="sections" id="nav-sections">
+      <button class="active" data-filter="all">全部</button>
+      <button class="highlight" data-filter="opinion">冷眼 · 本報編輯室</button>
+      <button class="highlight" data-filter="台灣政治">台灣政治</button>
+      <button data-filter="地緣政治">地緣政治</button>
+      <button data-filter="科技與AI">科技與AI</button>
+      <button data-filter="台美股">台美股</button>
+      <button data-filter="全球經濟">全球經濟</button>
+      <button data-filter="社會與氣候">社會與氣候</button>
+    </nav>
+  </header>
+
+  <main class="front">
+
+    <section class="col-left">
+      <article class="story" data-category="台美股">
+        <div class="kicker">台美股</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A23W0096?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">AI資金大撤退？那指重挫2.6%、費半血洗近7%　台指期夜盤狂瀉580點</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/f5b90d82-1d6a-4de1-9f25-a4ecf74cfa0e.jpeg" alt="美股科技股重挫費半血洗" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>市場對巨額AI資本支出轉化為營收的疑慮急遽升高，科技股全面暴跌，費半重挫6.72%，台積電ADR大跌4.5%引發恐慌。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">儘管Meta財報穩健，但企業在AI算力上的天量資本支出引爆華爾街拋售潮。美股週四科技巨頭全面下殺，那斯達克指數下挫2.6%，費城半導體指數暴跌6.72%。在美掛牌台積電ADR重摔4.52%、日月光ADR暴跌11%，引爆台指期夜盤狂瀉580點、失守4萬6關卡，市場避險情緒急速升溫。</p>
+        <div class="byline">民視 / 彭博社</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>市場對AI「先砸錢後變現」的耐心宣告告罄，資金自高估值科技股大舉外逃，短線多頭防線面臨開盤融資停損踩踏的極限壓力測試。</p>
+        </div>
+      </article>
+
+      <article class="story" data-category="科技與AI">
+        <div class="kicker">科技與AI</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A22W0078?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">防晶片生產受阻！美FCC核准英特爾外國自動化機器人豁免令</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/summernotefiles/News/4b254ce8-a2a9-4b7e-9765-e203097bba9d.jpg" alt="美FCC核准外國機器人豁免" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>為確保先進製程晶圓廠無人化產線不停擺，美國監管機構為英特爾等晶片巨擘進口精密自動化機器人破例開綠燈。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">為避免半導體法案投資的先進晶圓廠因供應鏈審查陷入延宕，美國聯邦通訊委員會（FCC）正式核發豁免令，准許英特爾等本土晶圓製造商引進關鍵外國自動化機器人與傳感設備。這項決定突顯高階晶片製造對跨國精密工業的高度依賴，無法單純透過行政禁令全面割裂。</p>
+        <div class="byline">民視 / 華爾街日報</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>半導體製造的全球分工深層複雜，美國極力推進「製造回流」時，仍不得不向現實產業鏈妥協，技術封閉與生產效率的矛盾日益加深。</p>
+        </div>
+      </article>
+
+      <article class="story" data-category="台美股" data-nav-only="true">
+        <div class="kicker">台美股 · 巨頭財測</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A23W0095?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">Meta擴大AI支出引發市場疑慮！科技股全面跳水重挫</a></h2>
+        <p class="excerpt">Meta在最新財報中重申將持續大幅追加數百億美元於資料中心與AI伺服器建置，引發華爾街對折舊成本飆升侵蝕未來營業利益的深層擔憂。投資人選擇逢高獲利了結，Meta盤後一度重挫逾8%，引發連鎖拋售效應波及微軟與Alphabet。</p>
+        <div class="byline">民視 / CNBC</div>
+        <div class="snark"><p><span class="label">戰略</span>資本市場正從盲目追捧「算力軍備競賽」轉入精算「投資報酬率（ROI）」階段，缺乏即時變現路徑的巨額投資正轉化為股價重壓。</p></div>
+      </article>
+
+      <article class="story" data-category="台美股" data-nav-only="true">
+        <div class="kicker">台美股 · 原物料鏈</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A22W0065?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">通用汽車取消稀土磁鐵長約！槓上本土供應商對簿公堂</a></h2>
+        <p class="excerpt">因電動車銷量成長趨緩，通用汽車（GM）正式通知美國稀土磁鐵製造商終止長期供貨合約，遭供應商以違約索賠告上仲裁法庭。這場訴訟標誌著北美在擺脫中國稀土壟斷的本土供應鏈嘗試中，遭遇下游需求冷卻的沉重現實打擊。</p>
+        <div class="byline">民視 / 金融時報</div>
+        <div class="snark"><p><span class="label">戰略</span>去風險化的供應鏈重組成本極高，當下游終端銷量無法支撐本土溢價，西方國家的關鍵戰略礦物自主化目標將面臨市場機制淘汰考驗。</p></div>
+      </article>
+    </section>
+
+    <section class="col-lead">
+      <article class="story lead" data-category="地緣政治">
+        <div class="kicker">地緣政治 · 今日頭條</div>
+        <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A23W0098?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">降低對美依賴、擺脫中國掌控！全球盟邦掀「國防主權」自主浪潮</a></h2>
+        <figure>
+          <img src="https://cdn.ftvnews.com.tw/manasystem/FileData/News/1d3ffbc2-7d74-4a45-b173-90ca454a427f.jpg" alt="全球國防主權自主軍備崛起" loading="lazy" onerror="this.parentElement.style.display='none'">
+          <figcaption>川普回歸政策不確定性與北京對關鍵礦物禁運，促使加拿大、歐洲與新興國家全力發展本土國防軍工與無人戰力。（圖：民視）</figcaption>
+        </figure>
+        <p class="excerpt">面對日益緊張的大國對抗局勢，全球中等強國正加速推動「國防主權」，力求降低對美國軍工系統的依賴，並徹底清除受中國控制的敏感供應鏈。從加拿大被迫從零重建本土無人防務工業，到挪威嚴防中製電動車情蒐，再到非洲奈及利亞自行研製千公里航程AI巡邏無人機，各國普遍意識到：在大國博弈與出口管制的夾擊下，唯有建立本土化的軟硬體軍工產能與非中零件網絡，才能在極端地緣危機中維繫自主防衛的底線。</p>
+        <div class="byline">民視 / 彭博社 / 防衛新聞 · 2026-10-23</div>
+        <div class="snark">
+          <p><span class="label">戰略</span>全球安全格局正從美軍為核心的「集體防禦體系」，走向各國尋求自主自保的「分散式堡壘模式」，這將推升各國軍費佔比並重塑全球軍工貿易版圖。</p>
+          <p><span class="label">觀點</span>國防自主意味著放棄規模經濟與承受巨額本土研發成本，對依賴外貿的開放型經濟體而言，如何在軍事自給與民生財政之間求取平衡將是殘酷難題。</p>
+        </div>
+      </article>
+    </section>
+
+    <section class="col-op opinion">
+      <h3>冷眼 · 本報編輯室</h3>
+      <article>
+        <h2>當費半暴跌與颱風警報同時響起：科技泡泡外的真實世界</h2>
+        <p class="drop">週四清晨的台灣，籠罩在兩種截然不同卻同樣令人窒息的警報聲中。在數位與金融的世界裡，華爾街科技巨擘擴大資本支出的疑慮引爆了無差別拋售狂潮，費城半導體指數血洗近百分之七，台積電ADR大跌、台指期夜盤狂瀉近六百點，宣告AI熱潮的估值狂歡進入殘酷的清算週期；而在實體世界的台灣東部，中度颱風薔琵的暴風圈正於拂曉時分觸陸打轉，狂風驟雨逼得台東縣府清晨緊急改口宣布停班停課，全島戒備致災性風雨。</p>
+        <p>金融市場的驟跌與秋颱的襲擊，彷彿一則殘酷的隱喻：人類在螢幕前用虛擬算力編織出的天價市值，終究必須回到實體世界的地心引力中接受考驗。當全球投資人開始嚴肅拷問Meta、微軟與輝達的天量資本支出究竟何時才能轉化為真實世界的生產力，科技產業才猛然驚醒：高聳入雲的AI神話，無法替家庭減輕飆升的取暖油價，更無法在颱風肆虐時自動加固脆弱的山區電網。</p>
+        <p>更荒謬的景象正在立法院上演。行政院長卓榮泰今日正式赴國會報告規模六千億元的追加預算案，朝野政黨的心思，依然牢牢捆綁在如何在農曆年前「普發一萬元現金」的民粹紅利上。外有全球防務自主化浪潮迫使盟友各自打造本土無人機、內有極端氣候對基礎水電交通網的步步進逼，我們的領導階層卻將超徵稅收視為選舉討好選民的煙火式分贓。當費半的暴跌撕下資本狂熱的面具、當薔琵的風雨敲打著防汛的堤防，我們必須自問：台灣賴以生存的，究竟是帳面上的萬億市值與選前的一萬元支票，還是真正深植於土地、能抵禦任何風暴的基礎設施韌性？</p>
+        <p class="sig">——大昌日報編輯室，由 AI 忠實策展</p>
+      </article>
+    </section>
+
+  </main>
+
+  <section class="band">
+    <div class="band-title">全球深度掃描（精選核心動態）</div>
+
+    <article class="story" data-category="台灣政治">
+      <div class="kicker">台灣政治</div>
+      <h2><a href="https://udn.com/news/story/6656/8302001" target="_blank" rel="noopener">卓榮泰今赴立院報告6076億追加預算　朝野針對普發1萬與水電凍漲展開大攻防</a></h2>
+      <p class="excerpt">行政院長卓榮泰今日率主計長與財經部會首長列席立法院，正式提出今年度中央政府總預算追加案編製經過並備詢。規模達6076億元的預算案中，包含普發現金1萬元特別條例、能源虧損撥補與社福津貼調增，朝野各黨磨刀霍霍，預計將就發放進度與財政紀律展開激烈言詞交鋒。</p>
+      <div class="byline">聯合報 / 中央社</div>
+      <div class="snark"><p><span class="label">戰略</span>追加預算案是立院新會期朝野首場直球對決，執政團隊力拼春節前現金入帳累積政治資產，在野黨則鎖定能源政策失敗與國庫虧損強力問責。</p></div>
+    </article>
+
+    <article class="story" data-category="台灣政治">
+      <div class="kicker">台灣政治</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A23W0081?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">中颱薔琵暴風圈觸陸！中央災害應變中心二級開設　政院緊盯疏散撤離防汛</a></h2>
+      <p class="excerpt">中度颱風薔琵暴風圈清晨已接觸台灣東南部陸地，中央災害應變中心提升為二級開設。行政院指示各部會嚴密監控易致災山區與土石流潛勢溪流，督導地方落實預防性疏散撤離，並指示水電維生管線與防汛抽水機組全員待命，全力戒備共伴效應帶來的強降雨。</p>
+      <div class="byline">民視 / 消防署</div>
+      <div class="snark"><p><span class="label">戰略</span>地方大選前夕的天然災害防救考驗中央與地方執政首長危機應變成熟度，災情通報與處置明快與否將直接反映在選民對治理能力的滿意度。</p></div>
+    </article>
+
+    <article class="story" data-category="全球經濟">
+      <div class="kicker">全球經濟</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A22W0052?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">川普動用冷戰時期《國防生產法》！擴大美國本土石油增產與煉油戰略融資</a></h2>
+      <p class="excerpt">為因應中東動盪引發之國際能源價格飆升，美國總統川普正式簽署行政命令，動用冷戰時期的《國防生產法》（DPA），指示五角大廈與能源部向本土石油開採商與煉油廠提供數十億美元之優惠融資與採購保證，宣示全力推動「美國能源霸權」壓制國內汽油通膨。</p>
+      <div class="byline">民視 / 路透社</div>
+      <div class="snark"><p><span class="label">戰略</span>白宮將化石能源戰略化為戰備物資，不僅徹底逆轉綠能轉型進程，更試圖以低廉能源成本做為吸引製造業回流美國的核心槓桿。</p></div>
+    </article>
+
+    <article class="story" data-category="科技與AI">
+      <div class="kicker">科技與AI</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A22W0077?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">AI助長自動化駭客攻擊風險　資安專家傳授政府與企業自保五大關鍵</a></h2>
+      <p class="excerpt">隨著多款自主AI漏洞挖掘代理在開源社群浮現，全球針對關鍵基礎設施的自動化探測攻擊激增。跨國資安機構發布緊急防護指引，呼籲企業實施零信任架構、強化多因子驗證、建立代碼持續審查機制，以應對AI驅動的毫米級網路武器襲擊。</p>
+      <div class="byline">民視 / 資安觀察</div>
+      <div class="snark"><p><span class="label">戰略</span>防禦方的補丁更新速度已無法匹敵生成式AI尋找弱點的指數級效率，網路防衛體系必須從「事後修補」徹底進化為「AI主動預防攔截」。</p></div>
+    </article>
+
+    <article class="story" data-category="社會與氣候">
+      <div class="kicker">社會與氣候</div>
+      <h2><a href="https://www.ftvnews.com.tw/news/detail/2026A23W0072?utm_source=tyenews&utm_medium=article" target="_blank" rel="noopener">中颱「薔琵」清晨4點觸陸！今明風雨最強「恐滯留打轉」東台灣嚴防豪雨</a></h2>
+      <p class="excerpt">氣象署發布陸上颱風警報，中颱「薔琵」暴風圈於清晨4點接觸台東與恆春半島，預估中心將於東南部海面滯留打轉。受外圍環流與東北季風雙重影響，宜花東地區將迎來超大豪雨，台東縣府清晨緊急宣布全縣停班停課，提醒民眾嚴加防範落石坍方與溪水暴漲。</p>
+      <div class="byline">民視 / 氣象署</div>
+      <div class="snark"><p><span class="label">戰略</span>秋季共伴效應引發之致災性強降雨再次考驗台灣脆弱的東部交通走廊，極端氣候常態化凸顯偏鄉基礎建設防災韌性升級的急迫性。</p></div>
+    </article>
+
+  </section>
+  <div class="empty-note" id="empty-note">此分類今日暫無新聞。</div>
+
+  <footer>
+    <p><strong>關於本頁</strong>：整合 Mesh MCP 新聞資料與 <a href="https://mashbean.net/mesh-mockup/" target="_blank">Mesh Mockup 版型</a> 的自動化個人報紙。新聞素材於 2026 年 10 月 23 日擷取；精選 9 則重磅新聞與 1 則獨立社評。</p>
+    <p>大昌日報 · 自動排版，AI 輔助策展</p>
+  </footer>
+
+</div>
+<script>
+(function () {
+  var buttons = document.querySelectorAll('#nav-sections button');
+  var articles = document.querySelectorAll('article.story');
+  var colLeft = document.querySelector('.col-left');
+  var colLead = document.querySelector('.col-lead');
+  var band = document.querySelector('.band');
+  var main = document.querySelector('main.front');
+  var opinion = document.querySelector('.col-op');
+  var emptyNote = document.getElementById('empty-note');
+
+  function apply(filter) {
+    if (filter === 'opinion') {
+      articles.forEach(function (a) { a.style.display = 'none'; });
+      if (colLeft) colLeft.style.display = 'none';
+      if (colLead) colLead.style.display = 'none';
+      if (band) band.style.display = 'none';
+      if (opinion) opinion.style.display = 'block';
+      if (main) {
+        main.classList.add('opinion-only');
+        main.classList.remove('lead-hidden');
+      }
+      if (emptyNote) emptyNote.style.display = 'none';
+    } else {
+      if (main) main.classList.remove('opinion-only');
+      if (opinion) opinion.style.display = (filter === 'all') ? '' : 'none';
+
+      articles.forEach(function (a) {
+        if (filter === 'all') {
+          a.style.display = a.dataset.navOnly === 'true' ? 'none' : '';
+        } else {
+          a.style.display = (a.dataset.category === filter) ? '' : 'none';
+        }
+      });
+
+      var total = 0;
+      [colLeft, colLead, band].forEach(function (b) {
+        if (!b) return;
+        var vis = Array.prototype.some.call(b.querySelectorAll('article.story'), function (a) {
+          return a.style.display !== 'none';
+        });
+        b.style.display = vis ? '' : 'none';
+        if (vis) total++;
+      });
+
+      if (main) {
+        main.classList.toggle('lead-hidden', colLead && colLead.style.display === 'none' && colLeft && colLeft.style.display !== 'none');
+      }
+
+      if (emptyNote) emptyNote.style.display = (total === 0) ? 'block' : 'none';
+    }
+
+    buttons.forEach(function (btn) {
+      btn.classList.toggle('active', btn.dataset.filter === filter);
+    });
+  }
+
+  buttons.forEach(function (btn) {
+    btn.addEventListener('click', function () { apply(btn.dataset.filter); });
+  });
+})();
+</script>
+</body>
+</html>
