@@ -9,6 +9,13 @@ set -euo pipefail
 REPO_DIR="/mnt/d/news"
 cd "$REPO_DIR"
 
+# 跨環境相容處理：在 Linux/WSL 下執行時，優先注入本地 SSH 私鑰，覆蓋 Windows 的 .git/config 設定
+if [ -f "/home/dev/.ssh/id_ed25519_news" ]; then
+    export GIT_SSH_COMMAND="ssh -i /home/dev/.ssh/id_ed25519_news -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+elif [ -f "/mnt/c/Users/jacky.hsieh/.ssh/id_ed25519_news" ]; then
+    export GIT_SSH_COMMAND="ssh -i /mnt/c/Users/jacky.hsieh/.ssh/id_ed25519_news -o IdentitiesOnly=yes -o StrictHostKeyChecking=accept-new"
+fi
+
 # 1. 隨機延遲設定（預設在 3 分鐘至 18 分鐘之間隨機浮動）
 # MIN_WAIT: 最小等待秒數（180 秒 = 3 分鐘）
 # MAX_RANDOM: 隨機增加秒數範圍（0 ~ 900 秒 = 0 ~ 15 分鐘）
